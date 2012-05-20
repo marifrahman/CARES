@@ -1,0 +1,101 @@
+/* 
+    Document   : datatablestyle
+    Created on : Apr 13, 2012, 4:22:39 PM
+    Author     : arifur.rahman
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+/* Self clearing - */
+div.dataTables_wrapper:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+html[xmlns] .dataTables_wrapper { 
+    display: block; 
+}
+* html .dataTables_wrapper { 
+    height: 1%; 
+}
+
+div.dataTables_length {
+
+    /*float:left; */
+}
+
+div.dataTables_filter {
+
+
+    float: right;
+}
+
+div.dataTables_info {
+    float:left;
+
+}
+
+div.dataTables_paginate {
+    float:right;
+
+}
+
+div.dataTables_info {
+    padding: 18px 6px 6px 6px;
+}
+
+div.dataTables_paginate{
+    padding: 25px;
+}
+
+
+a.paginate_button,
+a.paginate_active {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    border-radius: 4px 4px 4px 4px;
+    font-size: 10px;
+    margin: 0 5px 0 0;
+    padding: 3px 6px;
+    border: 1px solid #DDDDDD;
+    cursor: pointer;
+    *cursor: hand;
+}
+
+a.paginate_active {
+    background: url("../images/bg-button-blue.gif") repeat-x scroll left top #004A95 !important;
+    border-color: #004994 !important;
+    color: #FFFFFF !important;
+
+}
+
+a.paginate_button_disabled {
+    color: #3d6672;
+}
+.paging_full_numbers a:active {
+    outline: none
+}
+.paging_full_numbers a:hover {
+    text-decoration: none;
+}
+
+div.dataTables_paginate span>a {
+    width: 20px;
+    text-align: center;
+}
+
+
+
+
+
+
+

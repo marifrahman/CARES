@@ -1,0 +1,30 @@
+last_name,first_name,employer,billed_amount,payment_amount,invoice_date,last_payment_date,city,state,zip_code
+Hoppe,Rudolph,Widget Corp,604.9,781.3,"Mon, 19 Dec 2011 00:00:00 +0000","Tue, 6 Mar 2012 00:00:00 +0000",Hollywood,FL,33021
+Purdy,Anjali,"Acme, inc.",289.3,174.5,"Fri, 13 Apr 2012 00:00:00 +0000","Fri, 13 Apr 2012 00:00:00 +0000",Fort Myers,FL,33907
+Moen,Colby,Mooby Corp,134.7,753.6,"Fri, 23 Mar 2012 00:00:00 +0000","Fri, 30 Mar 2012 00:00:00 +0000",Davie,FL,33331
+Eichmann,Roderick,QWERTY Logistics,775.1,945.3,"Fri, 29 Apr 2011 00:00:00 +0000","Sat, 4 Jun 2011 00:00:00 +0000",Davie,FL,33331
+Jenkins,Marina,Globex Corporation,723.6,441.4,"Thu, 29 Mar 2012 00:00:00 +0000","Tue, 10 Apr 2012 00:00:00 +0000",Ft Myers,FL,33901
+Murazik,Stevie,ABC Telecom,405.9,836.6,"Wed, 24 Nov 2010 00:00:00 +0000","Wed, 16 Feb 2011 00:00:00 +0000",Tampa,FL,33606
+Bosco,Vesta,Smith and Co.,34.7,183.8,"Sat, 9 Jul 2011 00:00:00 +0000","Fri, 23 Mar 2012 00:00:00 +0000",Marianna,FL,32446
+Ward,Friedrich,Acme Corp,761.6,434.7,"Tue, 3 Apr 2012 00:00:00 +0000","Thu, 12 Apr 2012 00:00:00 +0000",Miai,FL,33173
+Flatley,Liliana,LexCorp,952.7,731.3,"Fri, 8 Oct 2010 00:00:00 +0000","Wed, 7 Mar 2012 00:00:00 +0000",Miai,FL,33173
+Jewess,Gregorio,Foo Bars,687.3,182.5,"Fri, 20 Jan 2012 00:00:00 +0000","Sun, 26 Feb 2012 00:00:00 +0000",Miai,FL,33173
+Rohan,Giovanni,Mooby Corp,797.8,247.3,"Fri, 19 Nov 2010 00:00:00 +0000","Sun, 25 Mar 2012 00:00:00 +0000",Melbourne,FL,32940
+Brekke,Beau,Sombra Corporation,725.6,723.2,"Wed, 17 Nov 2010 00:00:00 +0000","Wed, 25 May 2011 00:00:00 +0000",Ft Myers,FL,33901
+Cronin,Jayson,123 Warehousing,327.3,186.2,"Mon, 27 Feb 2012 00:00:00 +0000","Thu, 29 Mar 2012 00:00:00 +0000",Fort Walton Beach,FL,32548
+Jerde,Samson,Omni Consimer Products,13.0,842.8,"Mon, 9 Apr 2012 00:00:00 +0000","Thu, 12 Apr 2012 00:00:00 +0000",Englewood,FL,34223
+Kiehn,Grady,Sample Company,778.2,70.4,"Tue, 6 Mar 2012 00:00:00 +0000","Sat, 24 Mar 2012 00:00:00 +0000",Amelia Island,FL,32034
+Mohr,Garrick,Praxis Corporation,45.8,944.3,"Sat, 7 Apr 2012 00:00:00 +0000","Wed, 11 Apr 2012 00:00:00 +0000",Amelia Island,FL,32034
+Bradtke,Wilhelm,Acme Corp,666.5,955.7,"Thu, 2 Feb 2012 00:00:00 +0000","Tue, 3 Apr 2012 00:00:00 +0000",Naples,FL,34110
+Langosh,Maegan,"Sample, inc",20.7,806.5,"Mon, 6 Dec 2010 00:00:00 +0000","Thu, 3 Mar 2011 00:00:00 +0000",Amelia Island,FL,32034
+Corwin,Bert,Western Gas & Electric,447.1,133.1,"Tue, 24 Jan 2012 00:00:00 +0000","Sat, 24 Mar 2012 00:00:00 +0000",Orange Park,FL,32073
+Nicolas,Jan,Sample Company,98.3,576.8,"Thu, 22 Mar 2012 00:00:00 +0000","Wed, 28 Mar 2012 00:00:00 +0000",Orange Park,FL,32073
+Mayert,Cindy,Sample Company,897.1,256.1,"Thu, 15 Dec 2011 00:00:00 +0000","Sun, 8 Jan 2012 00:00:00 +0000",Pembroke Pines,FL,33028
+Collins,Jane,Mooby Corp,429.0,66.9,"Mon, 16 Jan 2012 00:00:00 +0000","Thu, 5 Apr 2012 00:00:00 +0000",Fort Walton Beach,FL,32548
+Carter,Helena,North Central Positronics,846.4,222.8,"Fri, 6 Apr 2012 00:00:00 +0000","Sat, 7 Apr 2012 00:00:00 +0000",Englewood,FL,34223
+Greenfelder,Hollis,Mammoth Pictures,37.7,39.5,"Wed, 20 Oct 2010 00:00:00 +0000","Sat, 31 Mar 2012 00:00:00 +0000",Melbourne,FL,32940
+Sauer,Myra,Sample Company,665.8,987.5,"Wed, 4 Apr 2012 00:00:00 +0000","Sun, 8 Apr 2012 00:00:00 +0000",Jacksonville,FL,32204
+Hills,Ally,ABC Telecom,665.0,228.4,"Sat, 30 Oct 2010 00:00:00 +0000","Wed, 9 Mar 2011 00:00:00 +0000",Hollywood,FL,33021
+Schumm,Koby,LexCorp,21.8,368.8,"Sat, 24 Mar 2012 00:00:00 +0000","Sun, 1 Apr 2012 00:00:00 +0000",Miami,FL,33173
+Hermann,Timothy,Fake Brothers,504.8,531.7,"Thu, 2 Sep 2010 00:00:00 +0000","Fri, 13 Apr 2012 00:00:00 +0000",Pembroke Pines,FL,33028
+Yundt,Aimee,Sombra Corporation,379.6,435.4,"Tue, 13 Sep 2011 00:00:00 +0000","Thu, 23 Feb 2012 00:00:00 +0000",Melbourne,FL,32940
