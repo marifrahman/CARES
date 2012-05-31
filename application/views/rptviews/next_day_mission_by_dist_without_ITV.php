@@ -15,22 +15,33 @@
                     <?php foreach ($missiondata[0] as $key => $value) { ?>
                         <th><?php echo $key; ?></th>
                     <?php } ?>
+                        <th>Total</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($missiondata as $mission) { ?>
+                <?php  foreach ($missiondata as $mission) { ?>
 
                     <tr>
-                        <?php foreach ($mission as $key => $value) { ?>
+                        <?php $total = 0; foreach ($mission as $key => $value) { ?>
 
-                            <td><?php echo $value; ?></td>
+                            <td name="<?php $total +=$value; echo $key; ?>"><?php echo $value; ?></td>
 
                         <?php } ?>
-
+                            <td name="total"><?php echo $total; ?></td>
                     </tr>
-
+                    
                 <?php } ?>
-
+                    <tr>
+                    <td>Total</td>
+                    <?php
+                    foreach ($missiondata[0] as $key => $value) {
+                        if ($key != "Client Name") {
+                            ?>
+                            <td id="total_<?php echo $key; ?>"></td>
+            <?php }
+        } ?>   
+                    <td id="grand_total"></td>        
+                    </tr>
             </tbody>
         </table>
     <?php } ?>
@@ -41,17 +52,14 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
-
-        $('#total_unbilled').text(calcTotal('unbilled'));
-        $('#total_closed').text(calcTotal('closed'));
-        $('#total_cancelled_half').text(calcTotal('cancelled_half'));
-        $('#total_cancelled').text(calcTotal('cancelled'));
+            <?php
+        foreach ($missiondata[0] as $key => $value) {
+            if ($key != "Client Name") {
+                ?>
+        $('#total_<?php echo $key; ?>').text(calcTotal('<?php echo $key ; ?> '));
+         <?php }
+        } ?> 
         $('#grand_total').text(calcTotal('total'));
-        
-        
-       
-        
-        
         
 
     })

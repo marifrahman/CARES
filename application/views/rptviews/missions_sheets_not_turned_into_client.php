@@ -21,6 +21,7 @@
             <th>Client Name</th>
             <th>Mission Status as per OPS</th>
             <th>USC REMARKS 1</th>
+            <th>USC REMARKS 2</th>
         </tr>
     </thead>
     <tbody>

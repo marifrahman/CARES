@@ -18,6 +18,7 @@
             <th>Actual Arrival at Destination (AAAD)</th>
             <th>Date Uploaded (ALD)</th>
             <th>Date Downloaded (ADD)</th>
+            <th>Mission Status as per OPS</th>
             <th>Mission Status Reason</th>
             <th>Escort</th>
             <th>Type of Cargo</th>

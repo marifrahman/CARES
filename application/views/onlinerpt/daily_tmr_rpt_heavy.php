@@ -1,29 +1,26 @@
 <?php $this->load->view('includes/document_head'); ?>
 <?php $this->load->view('includes/header'); ?>
 
-<h2>List of remission without memo</h2>
-<hr/>
 
+<h2>Daily TMR Report Heavy</h2>
+<hr/>
 <table id="rpt_table" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" >
     <thead>
         <tr>
             <th>RLD</th>
             <th>TMR No.</th>
-            <th>Previous TMR no.</th>
-            <th>Remission to TMR</th>
-            <th>GDMS no.</th>
-             <th>Origin</th>
+            <th>GDMS No.</th>
+            <th>Origin</th>
             <th>Destination</th>
-            <th>Actual Arrival at Origin (AAAO)</th>
-            <th>Actual Arrival at Destination (AAAD)</th>
-            <th>Date Uploaded (ALD)</th>
-            <th>Date Downloaded (ADD)</th>
-            <th>Mission Status as per OPS</th>
+            <th>Actual Arrival at Origin(AAAO)</th>
+            <th>Actual Arrival at Destination(AAAD)</th>
+            <th>Date Uploaded(ALD) </th>
+            <th>Date Downloaded(ADD) </th>
             <th>Mission Status Reason</th>
             <th>Escort</th>
-            <th>Type of Cargo</th>
+            <th>Type of cargo</th>
             <th>Client Name</th>
-
+            
         </tr>
     </thead>
     <tbody>
@@ -41,7 +38,7 @@ $(document).ready(function() {
             },
             "bProcessing": true,
             "bServerSide"    : true,
-            "sAjaxSource"    : "<?php echo site_url('rptman_async/list_of_remission_without_memo')    ?>",
+            "sAjaxSource"    : "<?php echo site_url('rptman_async/daily_tmr_rpt_heavy')    ?>",
             "fnServerData": function ( sSource, aoData, fnCallback ) {
                 $.ajax( {
                     "dataType": 'json',

@@ -2,7 +2,7 @@
 <?php $this->load->view('includes/header'); ?>
 
 <div class="container">
-    <h2>Total Missions of next days by Distributor without Vendor Assignment</h2>
+    <h2>Total Missions of next 3 days by Distributor</h2>
     <hr/>
     <form class="well" action="" method="post">
         <input id="dateFrom" name="dateFrom" placeholder="RSD From..." /> <input id="dateTo" name="dateTo"  placeholder="RSD To..." /><br/>
@@ -15,40 +15,25 @@
                     <?php foreach ($missiondata[0] as $key => $value) { ?>
                         <th><?php echo $key; ?></th>
                     <?php } ?>
-                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($missiondata as $mission) { ?>
 
                     <tr>
-                        <?php
-                        $total = 0;
-                        foreach ($mission as $key => $value) {
-                            ?>
+                        <?php foreach ($mission as $key => $value) { ?>
 
-                            <td name="<?php echo $key; ?>"><?php $total +=$value;
-                echo $value; //echo ($key != "Client Name")?anchor('next_day_by_dist_without_vendor_details/1/3',$value): $value; ?></td>
+                        <td><?php echo $value; //echo ($key != "Client Name")?anchor('next_day_by_dist_without_vendor_details/1/3',$value): $value; ?></td>
 
-        <?php } ?>
-                        <td name="total"><?php echo $total; ?></td>
+                        <?php } ?>
+
                     </tr>
 
-                    <?php } ?>
-                <tr>
-                    <td>Total</td>
-                    <?php
-                    foreach ($missiondata[0] as $key => $value) {
-                        if ($key != "Client Name") {
-                            ?>
-                            <td id="total_<?php echo $key; ?>"></td>
-            <?php }
-        } ?>   
-                    <td id="grand_total"></td>        
-                </tr>
+                <?php } ?>
+
             </tbody>
         </table>
-<?php } ?>
+    <?php } ?>
 
 
 </div>
@@ -56,13 +41,11 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
-       <?php
-                    foreach ($missiondata[0] as $key => $value) {
-                        if ($key != "Client Name") {
-                            ?>
-        $('#total_<?php echo $key; ?>').text(calcTotal('<?php echo $key ; ?> '));
-         <?php }
-        } ?> 
+
+        $('#total_unbilled').text(calcTotal('unbilled'));
+        $('#total_closed').text(calcTotal('closed'));
+        $('#total_cancelled_half').text(calcTotal('cancelled_half'));
+        $('#total_cancelled').text(calcTotal('cancelled'));
         $('#grand_total').text(calcTotal('total'));
         
     

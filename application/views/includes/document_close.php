@@ -7,6 +7,7 @@
 
 <!-- Bootstrap JS, the minified bundle -->
 <script src="<?php echo base_url('resources/scripts/bootstrap.min.js'); ?>"></script>
+<script src="<?php echo base_url('resources/scripts/bootstrap-tooltip.js'); ?>"></script>
 
 <!-- Sample Plugin: Prettify -->
 <!--<script src="<?php //echo base_url('resources/scripts/prettify/prettify.js');     ?>"></script>-->

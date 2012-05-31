@@ -92,15 +92,14 @@ class rptman extends CI_Controller {
         $data = "";
         if ($this->input->post()) {
             $this->load->helper('date');
-            $dateFrom =  mdate("%Y-%m-%d", strtotime($this->input->post("dateFrom")));
-            $dateTo =  mdate("%Y-%m-%d", strtotime($this->input->post("dateTo")));
+            $dateFrom = mdate("%Y-%m-%d", strtotime($this->input->post("dateFrom")));
+            $dateTo = mdate("%Y-%m-%d", strtotime($this->input->post("dateTo")));
 
             $dates = $this->getDateRangeArray($dateFrom, $dateTo);
-           
+
             $this->load->model("rptmodels/rptmodel", "rptmodel");
             $data["missiondata"] = $this->rptmodel->next_day_mission_by_dist_without_vendor($dates);
             //var_dump($data["missiondata"]); die('dsf');
-            
         }
         $this->load->view("rptviews/next_day_mission_by_dist_without_vendor", $data);
     }
@@ -109,11 +108,11 @@ class rptman extends CI_Controller {
         $data = "";
         if ($this->input->post()) {
             $this->load->helper('date');
-            $dateFrom =  mdate("%Y-%m-%d", strtotime($this->input->post("dateFrom")));
-            $dateTo =  mdate("%Y-%m-%d", strtotime($this->input->post("dateTo")));
+            $dateFrom = mdate("%Y-%m-%d", strtotime($this->input->post("dateFrom")));
+            $dateTo = mdate("%Y-%m-%d", strtotime($this->input->post("dateTo")));
 
             $dates = $this->getDateRangeArray($dateFrom, $dateTo);
-           
+
             $this->load->model("rptmodels/rptmodel", "rptmodel");
             $data["missiondata"] = $this->rptmodel->next_day_mission_by_dist_without_ITV($dates);
             //var_dump($data["missiondata"]); die('dsf');
@@ -130,7 +129,10 @@ class rptman extends CI_Controller {
     }
 
     function missions_awaiting_usg_escort() {
-        //$this->load->view("rptviews/missions_awaiting_usg_escort");
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->missions_awaiting_usg_escort();
+
+        $this->load->view("rptviews/missions_awaiting_usg_escort", $data);
     }
 
     function ardd_report() {
@@ -144,18 +146,135 @@ class rptman extends CI_Controller {
     function daily_collective_ping_report() {
         $this->load->view("rptviews/daily_collective_ping_report");
     }
-    
-    
-    function onlineReports()
-    {
-        $this->load->view("rptviews/onlinerptlist");
+
+    /* Online reports */
+
+    function onlineReports() {
+        $this->load->view("onlinerpt/onlinerptlist");
+    }
+
+    function daily_tmr_rpt_fule() {
+        $this->load->view("onlinerpt/daily_tmr_rpt_fule");
+    }
+
+    function daily_tmr_rpt_dry() {
+        $this->load->view("onlinerpt/daily_tmr_rpt_dry");
+    }
+
+    function daily_tmr_rpt_heavy() {
+        $this->load->view("onlinerpt/daily_tmr_rpt_heavy");
+    }
+
+    function total_mission_next_days_wrt_dist() {
+        $data = "";
+        if ($this->input->post()) {
+            $this->load->helper('date');
+            $dateFrom = mdate("%Y-%m-%d", strtotime($this->input->post("dateFrom")));
+            $dateTo = mdate("%Y-%m-%d", strtotime($this->input->post("dateTo")));
+
+            $dates = $this->getDateRangeArray($dateFrom, $dateTo);
+
+            $this->load->model("rptmodels/rptmodel", "rptmodel");
+            $data["missiondata"] = $this->rptmodel->total_mission_next_days_wrt_dist($dates);
+            //var_dump($data["missiondata"]); die('dsf');
+        }
+
+        $this->load->view("onlinerpt/total_mission_next_days_wrt_dist", $data);
+    }
+
+    //Online -7
+    function rsd_met_wrt_dist() {
+
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->rsd_met_wrt_dist("WHERE rsd_status='met'");
+
+        $this->load->view("onlinerpt/rsd_met_wrt_dist", $data);
+    }
+
+    //Online -8
+    function rsd_not_met_wrt_dist() {
+
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->rsd_met_wrt_dist("WHERE rsd_status='not_met'");
+
+        $this->load->view("onlinerpt/rsd_not_met_wrt_dist", $data);
+    }
+
+    //Online -9
+    function itv_pinging_for_rsd_wrt_dist() {
+
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->rsd_met_wrt_dist("WHERE ping_status='pinging'");
+
+        $this->load->view("onlinerpt/itv_pinging_for_rsd_wrt_dist", $data);
+    }
+
+    //Online -10
+    function itv_not_pinging_for_rsd_wrt_dist() {
+
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->rsd_met_wrt_dist("WHERE ping_status='not_pinging'");
+
+        $this->load->view("onlinerpt/itv_not_pinging_for_rsd_wrt_dist", $data);
+    }
+
+    //Online -11
+    function itv_pinging_in_cooldown_wrt_dist() {
+
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->rsd_met_wrt_dist("WHERE ping_status='pinging' AND cooldown_status = 'inside_cooldown'");
+
+        $this->load->view("onlinerpt/itv_pinging_in_cooldown_wrt_dist", $data);
+    }
+
+    //Online -12
+    function itv_pinging_not_in_cooldown_wrt_dist() {
+
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->rsd_met_wrt_dist("WHERE ping_status='not_pinging' AND cooldown_status = 'inside_cooldown'");
+
+        $this->load->view("onlinerpt/itv_pinging_not_in_cooldown_wrt_dist", $data);
+    }
+
+    //Online -13
+    function total_mission_closed_itv_not_returned() {
+        $this->load->view("onlinerpt/total_mission_closed_itv_not_returned");
+    }
+
+    //Online -14
+    function total_mission_closed_waiting_mission_sheet_returned() {
+        $this->load->view("onlinerpt/total_mission_closed_waiting_mission_sheet_returned");
+    }
+
+    //Online -15
+    function trucks_with_psc_pinging() {
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->trucks_with_psc_pinging("ping_status = 'pinging'");
+
+        $this->load->view("onlinerpt/trucks_with_psc_pinging", $data);
+    }
+
+    function trucks_with_psc_not_pinging() {
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["clossed_mission_data"] = $this->rptmodel->trucks_with_psc_pinging("ping_status = 'not_pinging'");
+
+        $this->load->view("onlinerpt/trucks_with_psc_not_pinging", $data);
     }
     
-    function dynamicReport()
-    {
+    function total_active_mission_wrt_dist_suits() {
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        $data["missiondata"] = $this->rptmodel->total_active_mission_wrt_dist_suits();
+
+        $this->load->view("onlinerpt/total_active_mission_wrt_dist_suits", $data);
+    }
+    
+    
+
+    /* Dynamic reports */
+
+    function dynamicReport() {
         $this->load->view("rptviews/dynamicrpt");
     }
-    
 
 }
 

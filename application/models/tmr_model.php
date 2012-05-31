@@ -111,7 +111,7 @@ class tmr_model extends CI_Model {
 
 
         $edit = "<a href=" . site_url('filecontroller/editTMR/$1') . " title='Edit'><i class='icon-edit'> </i></a>";
-        $view = "<a href='#' title='View details'><i class='icon-check'> </i></a>"; //. site_url('filecontroller/viewTMR/$1') .
+        $view = "<a href=". site_url('filecontroller/viewTMR/$1') ." title='View details'><i class='icon-check'> </i></a>"; //
         $this->load->helper("formater");
         $this->datatables->select('tmr_no,gdms_no,remission_to_tmr,ping_status,rsd,mission_status_ops.status,container_no,driver_name,driver_tazkira,trnscn_id');
         $this->datatables->from('usc_tmr');

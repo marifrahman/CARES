@@ -21,7 +21,7 @@
             <th>RDD</th>
             <th>ARDD</th>
             <th>Owner Name</th>
-            <!--<th>ITV Ping Status</th>-->
+            <th>ITV Ping Status</th>
             <th>USC Remark 2</th>
             
 
@@ -54,6 +54,7 @@
                 { "mDataProp": "rdd"},
                 { "mDataProp": "ardd"},
                 { "mDataProp": "client_name"},
+                { "mDataProp": "ping_status"},
                 { "mDataProp": "usc_remark_2"},
             ],
             "bProcessing": true,

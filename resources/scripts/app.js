@@ -35,11 +35,18 @@ $(document).ready(function(){
     $('.date').datepicker(); 
     
     $('.nofuturedate').datepicker({
-        maxDate: "+0D"
+        maxDate: "+0D",
+        onClose: function(dateText, inst) { 
+            $(this).trigger("blur")
+                    
+        }
     } ); 
     //$('#aaao').datepicker({maxDate: "+0D" } ); 
     
-    
+    //Initialize tooltips
+    $(document).tooltip({
+        selector: "a[rel=tooltip]"
+    })
     
     
     

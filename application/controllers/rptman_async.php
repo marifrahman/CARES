@@ -23,7 +23,6 @@ class rptman_async extends CI_Controller {
     }
 
     function trucks_waiting_for_upload() {
-
         $this->load->model("rptmodels/rptmodel", "rptmodel");
         echo $this->rptmodel->trucks_waiting_for_upload();
     }
@@ -100,6 +99,43 @@ class rptman_async extends CI_Controller {
         $this->load->model("rptmodels/rptmodel","rptmodel");
         echo $this->rptmodel->daily_collective_ping_report();
     }
+    
+    /*Online reports */
+    function daily_tmr_rpt_fule()
+    {
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        echo $this->rptmodel->daily_tmr_rpt_fule();
+    }
+    
+    function daily_tmr_rpt_dry()
+    {
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        echo $this->rptmodel->daily_tmr_rpt_dry();
+    }
+    
+    function daily_tmr_rpt_heavy()
+    {
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        echo $this->rptmodel->daily_tmr_rpt_heavy();
+    }
+    
+    
+    function total_mission_closed_itv_not_returned()
+    {
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        echo $this->rptmodel->total_mission_closed_itv_not_returned();
+    }
+    
+    function total_mission_closed_waiting_mission_sheet_returned()
+    {
+        
+        $this->load->model("rptmodels/rptmodel", "rptmodel");
+        echo $this->rptmodel->total_mission_closed_waiting_mission_sheet_returned();
+    }
+    
+    
+    
+    
     
     function dynamicrpt()
     {

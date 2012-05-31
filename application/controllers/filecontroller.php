@@ -113,14 +113,10 @@ class filecontroller extends CI_Controller {
         $returnmsg = '';
         $data = $this->_loadGeneralData();
 
-
-
         if ($this->input->post()) {
 
             $this->load->helper('date');
             $this->load->model('tmr_model');
-
-
 
             $tmr_data = array();
             foreach ($this->input->post() as $key => $value) {
@@ -129,11 +125,12 @@ class filecontroller extends CI_Controller {
                     $tmr_data[$key] = $value;
                 }
             }
+             
             isset($tmr_data['rsd']) ? $tmr_data['rsd'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['rsd'])) : '';
-            $tmr_data['aaao'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaao']));
-            $tmr_data['aaad'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaad']));
-            $tmr_data['ald'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ald']));
-            $tmr_data['ad_d'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ad_d']));
+            isset($tmr_data['aaao']) ? $tmr_data['aaao'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaao'])) : '';
+            isset($tmr_data['aaad']) ? $tmr_data['aaad'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaad'])) : '';
+            isset($tmr_data['ald']) ? $tmr_data['ald'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ald'])) : '';
+            isset($tmr_data['ad_d']) ? $tmr_data['ad_d'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ad_d'])) : '';
 
             $trnscn_id = $this->tmr_model->create($tmr_data);
 
@@ -214,48 +211,84 @@ class filecontroller extends CI_Controller {
         $tmr_data = array();
 
         if ($this->input->post()) {
-            if ($this->input->post('updatetrm')) {
+            $tmr_data = array();
+            foreach ($this->input->post() as $key => $value) {
+                if ($key != "newemail" && $key != "rsdfiles" ) {
 
-                //$tmr_data = array();
-                foreach ($this->input->post() as $key => $value) {
-                    if ($key != "updatetrm") {
-
-                        $tmr_data[$key] = $value;
-                    }
+                    $tmr_data[$key] = $value;
                 }
-                isset($tmr_data['rsd']) ? $tmr_data['rsd'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['rsd'])) : '';
-                isset($tmr_data['aaao']) ? $tmr_data['aaao'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaao'])) : '';
-                isset($tmr_data['aaad']) ? $tmr_data['aaad'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaad'])) : '';
-                isset($tmr_data['ald']) ? $tmr_data['ald'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ald'])) : '';
-                isset($tmr_data['ad_d']) ? $tmr_data['ad_d'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ad_d'])) : '';
-
-                //var_dump($tmr_data);
-                
-                //die("sdfsd");
-                $this->tmr_model->update($trnscn_id, $tmr_data);
-                $tmr_data['successmsg'] = "Successfuly updated the TMR !";
-            } else if ($this->input->post('savenewemail')) {
-
-
-                $tmr_email_data["email_msg"] = $this->input->post("newemail");
-                $tmr_email_data["trnscn_id"] = $trnscn_id;
-                $this->tmr_model->createNewEmail($tmr_email_data);
-                $tmr_data = $this->tmr_model->loadTRMbyId($trnscn_id);
-
-                $tmr_data["previousemail"] = "";
-                $previousemaildata = $this->tmr_model->loadEmailbyId($trnscn_id);
-                if ($previousemaildata) {
-                    foreach ($previousemaildata as $emailmsg)
-                        $tmr_data["previousemail"] .= $emailmsg["email_msg"] . "\n----------\n";
-                }
-                $tmr_data["attachments"] = $this->tmr_model->loadAttachmentById($trnscn_id);
-                $tmr_data['successmsg'] = "Successfuly saved the new email conversation !";
-                //var_dump($tmr_email);
-                //die("sd");
             }
+            //var_dump($tmr_data["rsdfiles"]); die("");
+            isset($tmr_data['rsd']) ? $tmr_data['rsd'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['rsd'])) : '';
+            isset($tmr_data['aaao']) ? $tmr_data['aaao'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaao'])) : '';
+            isset($tmr_data['aaad']) ? $tmr_data['aaad'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaad'])) : '';
+            isset($tmr_data['ald']) ? $tmr_data['ald'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ald'])) : '';
+            isset($tmr_data['ad_d']) ? $tmr_data['ad_d'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ad_d'])) : '';
+
+            
+            $this->tmr_model->update($trnscn_id, $tmr_data);
+            
+            
+            $attachments = $this->do_upload($trnscn_id);
+            if ($attachments)
+                $this->tmr_model->createAttachment($attachments);
+
+
+            //} else if ($this->input->post('savenewemail')) {
+            if ($this->input->post("newemail") != "") {
+                $tmr_email_data['email_msg'] = $this->input->post("newemail");
+                $tmr_email_data['trnscn_id'] = $trnscn_id;
+                $this->tmr_model->createNewEmail($tmr_email_data);
+            }
+            /* $tmr_data = $this->tmr_model->loadTRMbyId($trnscn_id);
+
+              $tmr_data["previousemail"] = "";
+              $previousemaildata = $this->tmr_model->loadEmailbyId($trnscn_id);
+              if ($previousemaildata) {
+              foreach ($previousemaildata as $emailmsg)
+              $tmr_data["previousemail"] .= $emailmsg["email_msg"] . "\n----------\n";
+              }
+              $tmr_data["attachments"] = $this->tmr_model->loadAttachmentById($trnscn_id); */
+            $tmr_data['successmsg'] = "Successfuly updated the TMR !";
+            //var_dump($tmr_email);
+            //die("sd");
+            //}
         }
 
-        $tmr_data = array_merge($tmr_data,$this->_loadGeneralData());
+        $tmr_data = array_merge($tmr_data, $this->_loadGeneralData());
+        $tmr_main_data = $this->tmr_model->loadTRMbyId($trnscn_id);
+        $tmr_data = array_merge($tmr_data, $tmr_main_data);
+        //$tmr_data = $this->tmr_model->loadTRMbyId($trnscn_id);
+        //var_dump($tmr_data); die();
+        //Load emails
+        $tmr_data["previousemail"] = "";
+        $previousemaildata = $this->tmr_model->loadEmailbyId($trnscn_id);
+        if ($previousemaildata) {
+            foreach ($previousemaildata as $emailmsg)
+                $tmr_data["previousemail"] .= $emailmsg["email_msg"] . "\n----------\n";
+        }
+        //Load attachment
+        $tmr_data["attachments"] = $this->tmr_model->loadAttachmentById($trnscn_id);
+
+        $tmr_data['rsd'] = formatdate($tmr_data['rsd']);
+        $tmr_data['aaao'] = formatdate($tmr_data['aaao']);
+        $tmr_data['aaad'] = formatdate($tmr_data['aaad']);
+        $tmr_data['ald'] = formatdate($tmr_data['ald']);
+        $tmr_data['ad_d'] = formatdate($tmr_data['ad_d']);
+
+
+
+        $this->load->view("files/edittmr", $tmr_data);
+    }
+
+    function viewTMR($trnscn_id) {
+
+        $this->load->helper('formater');
+        $this->load->helper('date');
+        $this->load->model('tmr_model');
+        $tmr_data = array();
+
+        $tmr_data = array_merge($tmr_data, $this->_loadGeneralData());
         $tmr_main_data = $this->tmr_model->loadTRMbyId($trnscn_id);
         $tmr_data = array_merge($tmr_data, $tmr_main_data);
         //$tmr_data = $this->tmr_model->loadTRMbyId($trnscn_id);
@@ -278,9 +311,9 @@ class filecontroller extends CI_Controller {
         $tmr_data['ald'] = formatdate($tmr_data['ald']);
         $tmr_data['ad_d'] = formatdate($tmr_data['ad_d']);
 
-        
 
-        $this->load->view("files/edittmr", $tmr_data);
+
+        $this->load->view("files/viewtmr", $tmr_data);
     }
 
 }
