@@ -55,6 +55,10 @@
                     </select>
                     <label>Container no.</label>
                     <input  type="text" class="span3" id="container_no" value="<?php echo isset($container_no) ? $container_no : ''; ?>"  name="container_no"  />
+                    <label>Container return date</label>
+                    <input  type="text" class="span3 nofuturedate" id="container_return_date" value="<?php echo isset($container_return_date) ? $container_return_date : ''; ?>"  name="container_return_date"  />
+                    <label>Container remark</label>
+                    <input  type="text" class="span3" id="container_remark" value="<?php echo isset($container_remark) ? $container_remark : ''; ?>"  name="container_remark"  />
                     <label>Origin</label>
                     <select name="origin" id="origin" class="shadow_select span1">
                         <option value="baf" <?php if ($origin == 'baf')
@@ -368,6 +372,8 @@
                         <input class="span3"  type="text" id="fuel_qty_up" value="<?php echo isset($fuel_qty_up) ? $fuel_qty_up : ''; ?>" name="fuel_qty_up"  />
                         <label>Fuel quantity downloaded 1</label>
                         <input class="span3"  type="text" id="fuel_qty_dw_1" value="<?php echo isset($fuel_qty_dw_1) ? $fuel_qty_dw_1 : ''; ?>" name="fuel_qty_dw_1"  />
+                        <label>Fuel quantity downloaded 1 Date</label>
+                        <input class="span3 nofuturedate"  type="text" id="fuel_qty_dw_1_date" value="<?php echo isset($fuel_qty_dw_1_date) ? $fuel_qty_dw_1_date : ''; ?>" name="$fuel_qty_dw_1_date"  />
                         <label>Placard 1 request </label>
                         <select name="placard_1_rqst" id="placard_1_rqst" class="shadow_select span1">
                             <option value="" <?php if ($placard_1_rqst == '')
@@ -388,6 +394,8 @@
                         </select>
                         <label>Fuel quantity downloaded 2</label>
                         <input class="span3"  type="text" id="fuel_qty_dw_2" value="<?php echo isset($fuel_qty_dw_2) ? $fuel_qty_dw_2 : ''; ?>" name="fuel_qty_dw_2"  />
+                        <label>Fuel quantity downloaded 2 Date</label>
+                        <input class="span3 nofuturedate"  type="text" id="fuel_qty_dw_2_date" value="<?php echo isset($fuel_qty_dw_2_date) ? $fuel_qty_dw_2_date : ''; ?>" name="fuel_qty_dw_2_date"  />
                         <label>Placard 2 request </label>
                         <select name="placard_2_rqst" id="placard_2_rqst" class="shadow_select span1">
                             <option value="" <?php if ($placard_2_rqst == '')
@@ -408,6 +416,8 @@
                         </select>
                         <label>Fuel quantity downloaded 3</label>
                         <input class="span3"  type="text" id="fuel_qty_dw_3" value="<?php echo isset($fuel_qty_dw_3) ? $fuel_qty_dw_3 : ''; ?>" name="fuel_qty_dw_3"  />
+                        <label>Fuel quantity downloaded 3 Date</label>
+                        <input class="span3"  type="text" id="fuel_qty_dw_3_date" value="<?php echo isset($fuel_qty_dw_3_date) ? $fuel_qty_dw_3_date : ''; ?>" name="fuel_qty_dw_3_date"  />
                         <label>Placard 3 request </label>
                         <select name="placard_3_rqst" id="placard_3_rqst" class="shadow_select span1">
                             <option value="" <?php if ($placard_3_rqst == '')
@@ -428,6 +438,8 @@
                         </select>
                         <label>Fuel quantity downloaded 4</label>
                         <input class="span3"  type="text" id="fuel_qty_dw_4" value="<?php echo isset($fuel_qty_dw_4) ? $fuel_qty_dw_4 : ''; ?>" name="fuel_qty_dw_4"  />
+                        <label>Fuel quantity downloaded 4 Date</label>
+                        <input class="span3"  type="text" id="fuel_qty_dw_4_date" value="<?php echo isset($fuel_qty_dw_4_date) ? $fuel_qty_dw_4_date : ''; ?>" name="fuel_qty_dw_4_date"  />
                     <?php } ?>
                     <div class="control-group">
                         <label class="control-label">Final Shortage</label>
@@ -469,13 +481,30 @@
         </div>
         <div class="span4">
             <div class="well">
-            <p>
-            New Email<br/>
-            <textarea name="newemail" id="newemail" rows="25" style="width: 100%"></textarea>
-            </p>
-            <p>
-                <!--<button type="submit" name="savenewemail" id="savenewemail" value="savenewemail"  class="btn btn-primary ">Save this conversation</button>-->
-            </p>
+                <p>
+                    <label>Mission Issue status</label>
+                    <select name="mission_issue_status" id="mission_issue_status" class="shadow_select span1">
+                        <option value="open" <?php if ($mission_issue_status == 'open')
+                                    echo 'selected=1'; ?> >Open </option>
+                        <option value="urgent" <?php if ($mission_issue_status == 'urgent')
+                                    echo 'selected=1'; ?> >Urgent</option>
+                        <option value="open_fin" <?php if ($mission_issue_status == 'open_fin')
+                                    echo 'selected=1'; ?> >Open Fin</option>
+                        <option value="urgent_fin" <?php if ($mission_issue_status == 'urgent_fin')
+                                    echo 'selected=1'; ?> >Urgent Fin</option>
+                        <option value="closed" <?php if ($mission_issue_status == 'closed')
+                                    echo 'selected=1'; ?> >Closed</option>
+                    </select>    
+                    <label>Date of issue</label>
+                    <input  type="text" class="span3 nofuturedate" id="mission_issue_status_date" value="<?php echo isset($mission_issue_status_date) ? $mission_issue_status_date : ''; ?>"  name="mission_issue_status_date"  />
+
+                    <br/>
+                    New Email<br/>
+                    <textarea name="newemail" id="newemail" rows="25" style="width: 100%"></textarea>
+                </p>
+                <p>
+                    <!--<button type="submit" name="savenewemail" id="savenewemail" value="savenewemail"  class="btn btn-primary ">Save this conversation</button>-->
+                </p>
             </div>
 
 
@@ -483,9 +512,9 @@
         <div class="span4">
             <div class="well">
                 <p>
-                Previous follow up Email <br/>
-                <textarea rows="27" style="width: 100%" class="uneditable-input uneditable-textarea" ><?php if (isset($previousemail))
-                        echo $previousemail; ?></textarea>
+                    Previous follow up Email <br/>
+                    <textarea rows="27" style="width: 100%" class="uneditable-input uneditable-textarea" ><?php if (isset($previousemail))
+                                    echo $previousemail; ?></textarea>
                 </p>
 
             </div>  
@@ -507,7 +536,7 @@
                         </ul>
                     <?php } ?>
                     <table>
-                        
+
                     </table>  
                     <a id="add_rsd_file" href="#" rel="tooltip" title="Add more files" style="float:right; "><i class="icon-plus-sign clear" ></i></a>
                 </div>
@@ -633,7 +662,7 @@
         }).change()
         //Auto calculation
         //Remaining amount
-        $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2',input[id='adv_vendor_amt_3'],input[id='total_mission_cost'],input[id='vendor_penalty']").bind("keyup", remaining);
+        $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2'],input[id='adv_vendor_amt_3'],input[id='total_mission_cost'],input[id='vendor_penalty']").bind("keyup", remaining);
         function remaining() {
             var down = $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2',input[id='adv_vendor_amt_3'],input[id='vendor_penalty'] ").sum();
             var up = $("[id^='total_mission_cost']").val();
@@ -642,7 +671,7 @@
             $("#remaining_amt").text(remaining); 
         }
         //Total advance paid
-        $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2',input[id='adv_vendor_amt_3'] ").sum("keyup", "#total_advance");
+        $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2'],input[id='adv_vendor_amt_3'] ").sum("keyup", "#total_advance");
         //Days delay in upload
         $("input[id=rsd],input[id=ald]").bind("change", daysdelayup);
         function daysdelayup() {
@@ -738,15 +767,6 @@
     rdd.add( Validate.Presence );
     
      
-    var adv_vendor_amt_1 = new LiveValidation('adv_vendor_amt_1',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
-            if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_1_date').val()))
-            {
-                return false;
-            }
-            return true;
-        },failureMessage : "You must also fill up the following date field !!"} );
-   
     var adv_vendor_amt_1_date = new LiveValidation('adv_vendor_amt_1_date',{validMessage: " "});
     adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
             
@@ -755,10 +775,11 @@
                 return false;
             }
             return true;
+            
         },failureMessage:"You must fill up the above amount field !"} );
 
-    var adv_vendor_amt_1 = new LiveValidation('adv_vendor_amt_2',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
+    var adv_vendor_amt_2 = new LiveValidation('adv_vendor_amt_2',{validMessage: " "});
+    adv_vendor_amt_2.add(Validate.Custom, { against: function(value, args) {
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_2_date').val()))
             {
                 return false;
@@ -766,8 +787,10 @@
             return true;
         },failureMessage : "You must also fill up the following date field !!"} );
    
-    var adv_vendor_amt_1_date = new LiveValidation('adv_vendor_amt_2_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
+   
+   
+    var adv_vendor_amt_2_date = new LiveValidation('adv_vendor_amt_2_date',{validMessage: " "});
+    adv_vendor_amt_2_date.add(Validate.Custom, { against: function(value, args) {
             
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_2').val()))
             {
@@ -777,8 +800,8 @@
             
         },failureMessage:"You must fill up the above amount field !"} );
 
-    var adv_vendor_amt_1 = new LiveValidation('adv_vendor_amt_3',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
+    var adv_vendor_amt_3 = new LiveValidation('adv_vendor_amt_3',{validMessage: " "});
+    adv_vendor_amt_3.add(Validate.Custom, { against: function(value, args) {
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_3_date').val()))
             {
                 return false;
@@ -788,8 +811,8 @@
    
    
    
-    var adv_vendor_amt_1_date = new LiveValidation('adv_vendor_amt_3_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
+    var adv_vendor_amt_3_date = new LiveValidation('adv_vendor_amt_3_date',{validMessage: " "});
+    adv_vendor_amt_3_date.add(Validate.Custom, { against: function(value, args) {
             
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_3').val()))
             {
@@ -799,28 +822,10 @@
             
         },failureMessage:"You must fill up the above amount field !"} );
 
-    var adv_vendor_amt_1 = new LiveValidation('final_vendor_pay',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
-            if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay_date').val()))
-            {
-                return false;
-            }
-            return true;
-        },failureMessage : "You must also fill up the following date field !!"} );
-   
-    var adv_vendor_amt_1_date = new LiveValidation('final_vendor_pay_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
-            
-            if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay').val()))
-            {
-                return false;
-            }
-            return true;
-            
-        },failureMessage:"You must fill up the above amount field !"} );
 
-    var adv_vendor_amt_1 = new LiveValidation('final_vendor_pay',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
+
+    var final_vendor_pay = new LiveValidation('final_vendor_pay',{validMessage: " "});
+    final_vendor_pay.add(Validate.Custom, { against: function(value, args) {
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay_date').val()))
             {
                 return false;
@@ -828,8 +833,10 @@
             return true;
         },failureMessage : "You must also fill up the following date field !!"} );
    
-    var adv_vendor_amt_1_date = new LiveValidation('final_vendor_pay_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
+   
+   
+    var final_vendor_pay_date = new LiveValidation('final_vendor_pay_date',{validMessage: " "});
+    final_vendor_pay_date.add(Validate.Custom, { against: function(value, args) {
             
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay').val()))
             {

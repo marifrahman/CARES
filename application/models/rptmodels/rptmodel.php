@@ -367,8 +367,8 @@ class rptmodel extends CI_Model {
         foreach ($cargos as $cargo) {
             $queryStr .= ", SUM(usc_tmr.type_of_cargo_id = '$cargo->id') AS '$cargo->cargo_type' ";
         }
-        var_dump($cargo->id);
-        die();
+        //var_dump($cargo->id);
+        //die();
         $queryStr .= "FROM usc_tmr 
                     LEFT JOIN client_name on client_name.id = usc_tmr.client_name 
                     GROUP BY usc_tmr.client_name";

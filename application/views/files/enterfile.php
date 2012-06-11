@@ -50,6 +50,10 @@
                     </select>
                     <label>Container no.</label>
                     <input  type="text" class="span3"  name="container_no"  />
+                    <label>Container return date</label>
+                    <input  type="text" class="span3 nofuturedate" id="container_return_date" name="container_return_date"  />
+                    <label>Container remark</label>
+                    <input  type="text" class="span3"  name="container_remark"  />
                     <label>Origin</label>
                     <select id="origin" name="origin" class="shadow_select span2" >
                         <option value="baf">BAF</option>
@@ -72,12 +76,14 @@
                     <input  type="text" class="span3"  name="gdms_no"  />
                     <label>ESCORT</label>
                     <select name="escort" id="escort" class="shadow_select span1">
+                        <option value="none">NONE</option>
                         <option value="usg">USG</option>
                         <option value="psc">PSC</option>
                         <option value="none">None</option>
                     </select>
                     <label>Ping status</label>
                     <select name="ping_status" class="shadow_select span2">
+                        <option value=" "> </option>
                         <option value="pinging">Pinging</option>
                         <option value="not_pinging">Not Pinging</option>
                     </select>
@@ -87,6 +93,7 @@
                     <?php } ?>
                     <label>Cooldown status</label>
                     <select name="cooldown_status" id="cooldown_status" class="shadow_select span2">
+                        <option value=" "> </option>
                         <option value="away_cooldown">Away Cooldown</option>
                         <option value="inside_cooldown">Inside Cooldown</option>
                     </select>
@@ -95,6 +102,7 @@
                         <input class="span3"  type="text" id="cooldown_status_reason" name="cooldown_status_reason"  />
                         <label>RSD Status</label>
                         <select name="rsd_status" id="rsd_status" class="shadow_select span2">
+                            <option value=" "> </option>
                             <option value="met">Met</option>
                             <option value="not_met">Not Met</option>
                         </select>
@@ -167,7 +175,7 @@
                                 <option value="<?php echo $vendor['vend_id']; ?>"><?php echo $vendor['vendor_name']; ?></option>
                             <?php } ?>
                         </select>
-                        <input class="span3"  type="text" id="vendor_name" name="vendor_name"  />
+
                         <label>Vendor phone no.</label>
                         <input class="span3"  type="text" id="vendor_phone" name="vendor_phone"  />
                     <?php } ?>
@@ -332,6 +340,8 @@
                         <input class="span3"  type="text" id="fuel_qty_up" name="fuel_qty_up"  />
                         <label>Fuel quantity downloaded 1</label>
                         <input class="span3 "  type="text" id="fuel_qty_dw_1" name="fuel_qty_dw_1"  />
+                        <label>Fuel quantity downloaded 1 Date</label>
+                        <input class="span3 nofuturedate "  type="text" id="fuel_qty_dw_1_date" name="fuel_qty_dw_1_date"  />
                         <label>Placard 1 request </label>
                         <select name="placard_1_rqst" id="placard_1_rqst" class="shadow_select span1">
                             <option value=""> </option>
@@ -345,7 +355,9 @@
                             <option value="pheonix">PHEONIX</option>
                         </select>
                         <label>Fuel quantity downloaded 2</label>
-                        <input class="span3 fule_dl"  type="text" id="fuel_qty_dw_2" name="fuel_qty_dw_2"  />
+                        <input class="span3"  type="text" id="fuel_qty_dw_2" name="fuel_qty_dw_2"  />
+                        <label>Fuel quantity downloaded 2 Date</label>
+                        <input class="span3 nofuturedate"  type="text" id="fuel_qty_dw_2_date" name="fuel_qty_dw_2_date"  />
                         <label>Placard 2 request </label>
                         <select name="placard_2_rqst" id="placard_2_rqst" class="shadow_select span1">
                             <option value=""> </option>
@@ -359,7 +371,9 @@
                             <option value="pheonix">PHEONIX</option>
                         </select>
                         <label>Fuel quantity downloaded 3</label>
-                        <input class="span3 fule_dl"  type="text" id="fuel_qty_dw_3" name="fuel_qty_dw_3"  />
+                        <input class="span3 "  type="text" id="fuel_qty_dw_3" name="fuel_qty_dw_3"  />
+                        <label>Fuel quantity downloaded 3 Date</label>
+                        <input class="span3 nofuturedate "  type="text" id="fuel_qty_dw_3_date" name="fuel_qty_dw_3_date"  />
                         <label>Placard 3 request </label>
                         <select name="placard_3_rqst" id="placard_3_rqst" class="shadow_select span1">
                             <option value=""> </option>
@@ -374,6 +388,8 @@
                         </select>
                         <label>Fuel quantity downloaded 4</label>
                         <input class="span3 fule_dl"  type="text" id="fuel_qty_dw_4" name="fuel_qty_dw_4"  />
+                        <label>Fuel quantity downloaded 4 Date</label>
+                        <input class="span3 nofuturedate"  type="text" id="fuel_qty_dw_4_date" name="fuel_qty_dw_4_date"  />
                     <?php } ?>
 
                     <div class="control-group">
@@ -413,11 +429,24 @@
         </div>
         <div class="span8">
             <div class="well">
+                
+                <label>Mission Issue status </label>
+                <select name="mission_issue_status" id="mission_issue_status" class="shadow_select span3">
+                    <option value="open">Open </option>
+                    <option value="urgent">Urgent</option>
+                    <option value="open_fin">Open Fin</option>
+                    <option value="urgent_fin">Urgent Fin</option>
+                    <option value="closed">Closed</option>
+                </select>
+                <label>Date of issue </label>
+                <input class="span3 nofuturedate"  type="text" id="mission_issue_status_date" name="mission_issue_status_date"  />
+                
+                <br/>
                 New email<br/>
                 <textarea name="newemail" id="newemail" rows="25" style="width: 100%"></textarea>
                 <!--<button name="newemail" id="newemail"  class="btn btn-primary ">Create</button>-->
             </div>
-       
+
         </div>
         <div id="attachment"  class="span8">
             <div class="span2" style="margin:0px;">
@@ -567,7 +596,7 @@
         //Remaining amount
         $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2'],input[id='adv_vendor_amt_3'],input[id='total_mission_cost'],input[id='vendor_penalty']").bind("keyup", remaining);
         function remaining() {
-            var down = $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2]',input[id='adv_vendor_amt_3'],input[id='vendor_penalty'] ").sum();
+            var down = $("input[id='adv_vendor_amt_1'],input[id='adv_vendor_amt_2'],input[id='adv_vendor_amt_3'],input[id='vendor_penalty'] ").sum();
             var up = $("[id^='total_mission_cost']").val();
             var remaining = up-down;
             //alert(remaining);
@@ -723,7 +752,7 @@
     var rdd = new LiveValidation('rdd',{validMessage: " "});
     rdd.add( Validate.Presence );
     
-     
+    
     var adv_vendor_amt_1 = new LiveValidation('adv_vendor_amt_1',{validMessage: " "});
     adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_1_date').val()))
@@ -746,8 +775,8 @@
             
         },failureMessage:"You must fill up the above amount field !"} );
 
-    var adv_vendor_amt_1 = new LiveValidation('adv_vendor_amt_2',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
+    var adv_vendor_amt_2 = new LiveValidation('adv_vendor_amt_2',{validMessage: " "});
+    adv_vendor_amt_2.add(Validate.Custom, { against: function(value, args) {
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_2_date').val()))
             {
                 return false;
@@ -757,8 +786,8 @@
    
    
    
-    var adv_vendor_amt_1_date = new LiveValidation('adv_vendor_amt_2_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
+    var adv_vendor_amt_2_date = new LiveValidation('adv_vendor_amt_2_date',{validMessage: " "});
+    adv_vendor_amt_2_date.add(Validate.Custom, { against: function(value, args) {
             
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_2').val()))
             {
@@ -768,8 +797,8 @@
             
         },failureMessage:"You must fill up the above amount field !"} );
 
-    var adv_vendor_amt_1 = new LiveValidation('adv_vendor_amt_3',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
+    var adv_vendor_amt_3 = new LiveValidation('adv_vendor_amt_3',{validMessage: " "});
+    adv_vendor_amt_3.add(Validate.Custom, { against: function(value, args) {
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_3_date').val()))
             {
                 return false;
@@ -779,8 +808,8 @@
    
    
    
-    var adv_vendor_amt_1_date = new LiveValidation('adv_vendor_amt_3_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
+    var adv_vendor_amt_3_date = new LiveValidation('adv_vendor_amt_3_date',{validMessage: " "});
+    adv_vendor_amt_3_date.add(Validate.Custom, { against: function(value, args) {
             
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#adv_vendor_amt_3').val()))
             {
@@ -792,8 +821,8 @@
 
 
 
-    var adv_vendor_amt_1 = new LiveValidation('final_vendor_pay',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
+    var final_vendor_pay = new LiveValidation('final_vendor_pay',{validMessage: " "});
+    final_vendor_pay.add(Validate.Custom, { against: function(value, args) {
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay_date').val()))
             {
                 return false;
@@ -803,8 +832,8 @@
    
    
    
-    var adv_vendor_amt_1_date = new LiveValidation('final_vendor_pay_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
+    var final_vendor_pay_date = new LiveValidation('final_vendor_pay_date',{validMessage: " "});
+    final_vendor_pay_date.add(Validate.Custom, { against: function(value, args) {
             
             if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay').val()))
             {
@@ -813,34 +842,13 @@
             return true;
             
         },failureMessage:"You must fill up the above amount field !"} );
-
-    var adv_vendor_amt_1 = new LiveValidation('final_vendor_pay',{validMessage: " "});
-    adv_vendor_amt_1.add(Validate.Custom, { against: function(value, args) {
-            if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay_date').val()))
-            {
-                return false;
-            }
-            return true;
-        },failureMessage : "You must also fill up the following date field !!"} );
-   
-   
-   
-    var adv_vendor_amt_1_date = new LiveValidation('final_vendor_pay_date',{validMessage: " "});
-    adv_vendor_amt_1_date.add(Validate.Custom, { against: function(value, args) {
-            
-            if(Validate.now( Validate.Presence,value) && !Validate.now( Validate.Presence,$('#final_vendor_pay').val()))
-            {
-                return false;
-            }
-            return true;
-            
-        },failureMessage:"You must fill up the above amount field !"} );
+    
        
     /*
      * Need further cleaning up following validation
      */
-    
-    /*var aaao = new LiveValidation('aaao',{OnlyOnBlur:true,validMessage: " ", onInvalid :showGrowl});
+    /*
+    var aaao = new LiveValidation('aaao',{OnlyOnBlur:true,validMessage: " ", onInvalid :showGrowl});
     aaao.add(Validate.Custom, { against: function(value, args) {
             if(new Date(value).getTime() < new Date($('#rsd').val()).getTime() ) 
                 return false;
@@ -859,6 +867,7 @@
             else 
                 return true;   
         },failureMessage:"ALD shouldn't be Before than RSD/AAAO; Please check and try again !"} );   
+    
     var rld = new LiveValidation('rld',{OnlyOnBlur:true,validMessage: " ", onInvalid :showGrowl});
     rld.add(Validate.Custom, { against: function(value, args) {
             if(new Date(value).getTime() < new Date($('#rsd').val()).getTime() ) 
@@ -866,6 +875,7 @@
             else 
                 return true;   
         },failureMessage:"RLD shouldn't be Before than RSD; please check and try again !"} );
+    
     var rdd = new LiveValidation('rdd',{OnlyOnBlur:true,validMessage: " ", onInvalid :showGrowl});
     rdd.add(Validate.Custom, { against: function(value, args) {
             var ald_time = new Date(value).getTime();
@@ -877,7 +887,7 @@
             else 
                 return true;   
         },failureMessage:"ALD shouldn't be Before than RSD/RLD; Please check and try again !"} ); 
-        */
+     */  
 </script>
 
 <?php $this->load->view('includes/footer'); ?>

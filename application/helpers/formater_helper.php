@@ -16,6 +16,10 @@ function lock_to_YN($val)
  {
      return date('m/d/Y g:i:s a', strtotime($val));
  }
+ function formatdateOnly($val)   
+ {
+     return date('m/d/Y', strtotime($val));
+ }
  
  //ardd = ALD+RDD-RLD+7
  function calc_ardd($ald,$rdd,$rld){

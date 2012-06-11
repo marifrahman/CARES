@@ -131,6 +131,16 @@ class filecontroller extends CI_Controller {
             isset($tmr_data['aaad']) ? $tmr_data['aaad'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaad'])) : '';
             isset($tmr_data['ald']) ? $tmr_data['ald'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ald'])) : '';
             isset($tmr_data['ad_d']) ? $tmr_data['ad_d'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ad_d'])) : '';
+            
+            isset($tmr_data['fuel_qty_dw_1_date']) ? $tmr_data['fuel_qty_dw_1_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_1_date'])) : '';
+            isset($tmr_data['fuel_qty_dw_2_date']) ? $tmr_data['fuel_qty_dw_2_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_2_date'])) : '';
+            isset($tmr_data['fuel_qty_dw_3_date']) ? $tmr_data['fuel_qty_dw_3_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_3_date'])) : '';
+            isset($tmr_data['fuel_qty_dw_4_date']) ? $tmr_data['fuel_qty_dw_4_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_4_date'])) : '';
+            
+            isset($tmr_data['container_return_date']) ? $tmr_data['container_return_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['container_return_date'])) : '';
+            
+            isset($tmr_data['mission_issue_status_date']) ? $tmr_data['mission_issue_status_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['mission_issue_status_date'])) : '';
+            
 
             $trnscn_id = $this->tmr_model->create($tmr_data);
 
@@ -224,7 +234,16 @@ class filecontroller extends CI_Controller {
             isset($tmr_data['aaad']) ? $tmr_data['aaad'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['aaad'])) : '';
             isset($tmr_data['ald']) ? $tmr_data['ald'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ald'])) : '';
             isset($tmr_data['ad_d']) ? $tmr_data['ad_d'] = mdate("%Y-%m-%d %H:%i", strtotime($tmr_data['ad_d'])) : '';
-
+            
+            isset($tmr_data['fuel_qty_dw_1_date']) ? $tmr_data['fuel_qty_dw_1_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_1_date'])) : '';
+            isset($tmr_data['fuel_qty_dw_2_date']) ? $tmr_data['fuel_qty_dw_2_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_2_date'])) : '';
+            isset($tmr_data['fuel_qty_dw_3_date']) ? $tmr_data['fuel_qty_dw_3_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_3_date'])) : '';
+            isset($tmr_data['fuel_qty_dw_4_date']) ? $tmr_data['fuel_qty_dw_4_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['fuel_qty_dw_4_date'])) : '';
+            
+            isset($tmr_data['container_return_date']) ? $tmr_data['container_return_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['container_return_date'])) : '';
+            
+            isset($tmr_data['mission_issue_status_date']) ? $tmr_data['mission_issue_status_date'] = mdate("%Y-%m-%d", strtotime($tmr_data['mission_issue_status_date'])) : '';
+            
             
             $this->tmr_model->update($trnscn_id, $tmr_data);
             
@@ -275,6 +294,15 @@ class filecontroller extends CI_Controller {
         $tmr_data['aaad'] = formatdate($tmr_data['aaad']);
         $tmr_data['ald'] = formatdate($tmr_data['ald']);
         $tmr_data['ad_d'] = formatdate($tmr_data['ad_d']);
+        
+        $tmr_data['fuel_qty_dw_1_date'] = formatdateOnly($tmr_data['fuel_qty_dw_1_date']);
+        $tmr_data['fuel_qty_dw_2_date'] = formatdateOnly($tmr_data['fuel_qty_dw_2_date']);
+        $tmr_data['fuel_qty_dw_3_date'] = formatdateOnly($tmr_data['fuel_qty_dw_3_date']);
+        $tmr_data['fuel_qty_dw_4_date'] = formatdateOnly($tmr_data['fuel_qty_dw_4_date']);
+        
+        $tmr_data['container_return_date'] = formatdateOnly($tmr_data['container_return_date']);
+        
+        $tmr_data['mission_issue_status_date'] = formatdateOnly($tmr_data['mission_issue_status_date']);
 
 
 
