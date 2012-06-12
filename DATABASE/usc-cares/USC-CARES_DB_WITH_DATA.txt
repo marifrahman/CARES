@@ -1,0 +1,756 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jun 11, 2012 at 05:11 PM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `usc-cares`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ci_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `session_id` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `ip_address` varchar(16) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `user_agent` varchar(150) COLLATE utf8_bin NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`session_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('8f918772067b2f6e672e2bbe524f2834', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20100101 Firefox/12.0', 1338746827, 'a:10:{s:9:"user_data";s:0:"";s:10:"DX_user_id";s:1:"1";s:11:"DX_username";s:5:"admin";s:10:"DX_role_id";s:1:"2";s:12:"DX_role_name";s:5:"Admin";s:18:"DX_parent_roles_id";a:0:{}s:20:"DX_parent_roles_name";a:0:{}s:13:"DX_permission";a:0:{}s:21:"DX_parent_permissions";a:0:{}s:12:"DX_logged_in";b:1;}'),
+('4ab9d1b4f256d8b80de58f9c3ba42289', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11', 1339134565, 'a:10:{s:9:"user_data";s:0:"";s:10:"DX_user_id";s:1:"1";s:11:"DX_username";s:5:"admin";s:10:"DX_role_id";s:1:"2";s:12:"DX_role_name";s:5:"Admin";s:18:"DX_parent_roles_id";a:0:{}s:20:"DX_parent_roles_name";a:0:{}s:13:"DX_permission";a:0:{}s:21:"DX_parent_permissions";a:0:{}s:12:"DX_logged_in";b:1;}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `client_name`
+--
+
+CREATE TABLE IF NOT EXISTS `client_name` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `client_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `client_name`
+--
+
+INSERT INTO `client_name` (`id`, `client_name`) VALUES
+(1, 'VW'),
+(2, 'RST'),
+(3, 'BPA'),
+(4, 'ATN');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login_attempts`
+--
+
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(40) COLLATE utf8_bin NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `login_attempts`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mission_status_client`
+--
+
+CREATE TABLE IF NOT EXISTS `mission_status_client` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `mission_status_client`
+--
+
+INSERT INTO `mission_status_client` (`id`, `status`) VALUES
+(1, 'Cancelled No Pay'),
+(2, 'Cancelled Half'),
+(3, 'Closed'),
+(4, 'Failure Pilferage'),
+(5, 'Failure No Show');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mission_status_ops`
+--
+
+CREATE TABLE IF NOT EXISTS `mission_status_ops` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `mission_status_ops`
+--
+
+INSERT INTO `mission_status_ops` (`id`, `status`) VALUES
+(1, 'Active'),
+(2, 'Cancelled'),
+(3, 'Completed'),
+(4, 'Illegal Remission – Memo'),
+(5, 'Remission Sheet Requested'),
+(6, 'Authorized Remission');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mission_status_reason`
+--
+
+CREATE TABLE IF NOT EXISTS `mission_status_reason` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `reason` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `mission_status_reason`
+--
+
+INSERT INTO `mission_status_reason` (`id`, `reason`) VALUES
+(1, 'MISSION RECEIVED'),
+(2, 'MISSION SHEET SIGNED AND EN ROUTE TO MCB'),
+(3, 'EN ROUTE TO DESTINATION WITH MILITARY ESCORT'),
+(4, 'AWAITING UPLOAD AT ORIGIN'),
+(5, 'CANCELLED'),
+(6, 'AWAITING MILITARY ESCORT TO DESTINATION'),
+(7, 'AWAITING LOCAL ESCORT TO DESTINATION'),
+(8, 'EN ROUTE TO DESTINATION WITH LOCAL ESCORT\r\n'),
+(9, 'AWAITING DOWNLOAD AT DESTINATION'),
+(10, 'AWAITING ENTRY TO ORIGIN');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mission_status_usc`
+--
+
+CREATE TABLE IF NOT EXISTS `mission_status_usc` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `mission_status_usc`
+--
+
+INSERT INTO `mission_status_usc` (`id`, `status`) VALUES
+(1, 'Cancelled No Pay'),
+(2, 'Cancelled Half'),
+(3, 'Closed'),
+(4, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `data` text COLLATE utf8_bin,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `permissions`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(30) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `parent_id`, `name`) VALUES
+(5, 0, 'Ops Level 3'),
+(2, 0, 'Admin'),
+(3, 0, 'Ops Level 1'),
+(4, 0, 'Ops Level 2'),
+(7, 0, 'Finance level 1'),
+(8, 0, 'Finance level 2'),
+(9, 0, 'Finance level 3'),
+(10, 0, 'Finance level 4');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type_of_cargo`
+--
+
+CREATE TABLE IF NOT EXISTS `type_of_cargo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cargo_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `type_of_cargo`
+--
+
+INSERT INTO `type_of_cargo` (`id`, `cargo_type`) VALUES
+(1, 'Dry'),
+(2, 'Heavy'),
+(3, 'Fuel');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type_of_truck`
+--
+
+CREATE TABLE IF NOT EXISTS `type_of_truck` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `truck_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `type_of_truck`
+--
+
+INSERT INTO `type_of_truck` (`id`, `truck_type`) VALUES
+(1, '20’ flatbed'),
+(2, '20’ flatbed with container'),
+(3, '20’ lowboy'),
+(4, '20’ super lowboy'),
+(5, '30’ lowboy'),
+(6, 'Bobtail'),
+(7, 'Refrigerated'),
+(8, '20’ Freezer Truck'),
+(9, '40’ Freezer Truck'),
+(10, '40’ flatbed'),
+(11, '40’ flatbed with container'),
+(12, '40’ lowboy'),
+(13, '40’ super lowboy'),
+(14, '5000 GAL'),
+(15, '1000 GAL');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usc_tmr`
+--
+
+CREATE TABLE IF NOT EXISTS `usc_tmr` (
+  `trnscn_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tmr_no` varchar(30) NOT NULL,
+  `rsd` datetime NOT NULL,
+  `rsd_status` varchar(10) NOT NULL,
+  `rsd_status_reason` varchar(30) NOT NULL,
+  `ping_status` varchar(20) NOT NULL,
+  `ping_status_reason` varchar(30) NOT NULL,
+  `cooldown_status` varchar(10) NOT NULL,
+  `cooldown_status_reason` varchar(30) NOT NULL,
+  `client_name` varchar(20) NOT NULL,
+  `previous_tmr` varchar(30) DEFAULT NULL,
+  `remission_to_tmr` varchar(30) DEFAULT NULL,
+  `type_of_truck_id` int(11) NOT NULL,
+  `container_no` varchar(30) NOT NULL,
+  `container_return_date` date NOT NULL,
+  `container_remark` varchar(30) NOT NULL,
+  `origin` varchar(20) NOT NULL,
+  `destination` varchar(20) NOT NULL,
+  `type_of_cargo_id` int(11) NOT NULL,
+  `mission_status_ops` varchar(50) NOT NULL,
+  `mission_status_usc` varchar(20) NOT NULL,
+  `mission_status_client` varchar(20) NOT NULL,
+  `mission_status_reason` varchar(100) NOT NULL,
+  `gdms_no` varchar(30) NOT NULL,
+  `escort` varchar(5) NOT NULL,
+  `round_trip` varchar(30) NOT NULL,
+  `mission_units` int(11) NOT NULL,
+  `rld` datetime NOT NULL,
+  `aaao` datetime NOT NULL,
+  `ald` datetime NOT NULL,
+  `days_delay_upload` varchar(30) NOT NULL,
+  `rdd` datetime NOT NULL,
+  `aaad` datetime NOT NULL,
+  `turned_to_client_date` datetime DEFAULT NULL,
+  `ad_d` datetime NOT NULL,
+  `days_delay_download` varchar(30) NOT NULL,
+  `total_delay` varchar(30) NOT NULL,
+  `dem_invoice_amt` varchar(30) NOT NULL,
+  `dem_invoice_date` datetime NOT NULL,
+  `dem_paid_status` varchar(30) NOT NULL,
+  `dem_remark` varchar(200) NOT NULL,
+  `mission_unit_price` varchar(30) NOT NULL,
+  `mission_total_price` varchar(30) NOT NULL,
+  `deduction_by_client` varchar(30) NOT NULL,
+  `transport_invoice_status` varchar(30) NOT NULL,
+  `transport_invoice_date` datetime NOT NULL,
+  `distributor_remark` varchar(300) NOT NULL,
+  `prime_customer_remark` varchar(300) NOT NULL,
+  `usc_remark_1` varchar(200) NOT NULL,
+  `usc_remark_2` varchar(200) NOT NULL,
+  `adv_vendor_amt_1` varchar(30) NOT NULL,
+  `adv_vendor_amt_1_date` datetime NOT NULL,
+  `adv_vendor_amt_2` varchar(30) NOT NULL,
+  `adv_vendor_amt_2_date` datetime NOT NULL,
+  `adv_vendor_amt_3` varchar(30) NOT NULL,
+  `adv_vendor_amt_3_date` datetime NOT NULL,
+  `total_advance` varchar(30) NOT NULL,
+  `vendor_penalty` varchar(30) NOT NULL,
+  `total_mission_cost` varchar(30) NOT NULL,
+  `remaining_amt` varchar(30) NOT NULL,
+  `final_vendor_pay` varchar(30) NOT NULL,
+  `final_vendor_pay_date` datetime NOT NULL,
+  `vendor_name` varchar(30) NOT NULL,
+  `vendor_phone` varchar(30) NOT NULL,
+  `m_sheet_trun_distributor` varchar(30) NOT NULL,
+  `m_sheet_trun_distributor_date` datetime NOT NULL,
+  `itv_return_status` varchar(30) NOT NULL,
+  `usc_pay_remark` varchar(200) NOT NULL,
+  `final_mission_status` varchar(30) NOT NULL,
+  `driver_name` varchar(30) NOT NULL,
+  `driver_tazkira` varchar(30) NOT NULL,
+  `driver_phone` varchar(30) NOT NULL,
+  `truck_no` varchar(30) NOT NULL,
+  `seal_no` varchar(30) NOT NULL,
+  `fuel_type` varchar(30) NOT NULL,
+  `fuel_qty_up` varchar(30) NOT NULL,
+  `fuel_qty_dw_1` varchar(30) NOT NULL,
+  `fuel_qty_dw_1_date` date NOT NULL,
+  `placard_1_rqst` varchar(30) NOT NULL,
+  `destination_2` varchar(30) NOT NULL,
+  `fuel_qty_dw_2` varchar(30) NOT NULL,
+  `fuel_qty_dw_2_date` date NOT NULL,
+  `placard_2_rqst` varchar(30) NOT NULL,
+  `destination_3` varchar(30) NOT NULL,
+  `fuel_qty_dw_3` varchar(30) NOT NULL,
+  `fuel_qty_dw_3_date` date NOT NULL,
+  `placard_3_rqst` varchar(30) NOT NULL,
+  `destination_4` varchar(30) NOT NULL,
+  `fuel_qty_dw_4` varchar(30) NOT NULL,
+  `fuel_qty_dw_4_date` date NOT NULL,
+  `final_shrtg_calc` varchar(30) NOT NULL,
+  `final_shrtg_as_customer` varchar(30) NOT NULL,
+  `final_delivery_percentange_calc` varchar(30) NOT NULL,
+  `final_delivery_percentange_as_client` varchar(30) NOT NULL,
+  `pilferage` varchar(30) NOT NULL,
+  `current_location` varchar(30) NOT NULL,
+  `mission_issue_status` varchar(30) NOT NULL,
+  `mission_issue_status_date` date NOT NULL,
+  `tmr_created_by` int(11) NOT NULL,
+  `tmr_created` datetime NOT NULL,
+  `tmr_updated_by` int(11) DEFAULT NULL,
+  `tmr_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`trnscn_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Main table to store tmr info' AUTO_INCREMENT=32 ;
+
+--
+-- Dumping data for table `usc_tmr`
+--
+
+INSERT INTO `usc_tmr` (`trnscn_id`, `tmr_no`, `rsd`, `rsd_status`, `rsd_status_reason`, `ping_status`, `ping_status_reason`, `cooldown_status`, `cooldown_status_reason`, `client_name`, `previous_tmr`, `remission_to_tmr`, `type_of_truck_id`, `container_no`, `container_return_date`, `container_remark`, `origin`, `destination`, `type_of_cargo_id`, `mission_status_ops`, `mission_status_usc`, `mission_status_client`, `mission_status_reason`, `gdms_no`, `escort`, `round_trip`, `mission_units`, `rld`, `aaao`, `ald`, `days_delay_upload`, `rdd`, `aaad`, `turned_to_client_date`, `ad_d`, `days_delay_download`, `total_delay`, `dem_invoice_amt`, `dem_invoice_date`, `dem_paid_status`, `dem_remark`, `mission_unit_price`, `mission_total_price`, `deduction_by_client`, `transport_invoice_status`, `transport_invoice_date`, `distributor_remark`, `prime_customer_remark`, `usc_remark_1`, `usc_remark_2`, `adv_vendor_amt_1`, `adv_vendor_amt_1_date`, `adv_vendor_amt_2`, `adv_vendor_amt_2_date`, `adv_vendor_amt_3`, `adv_vendor_amt_3_date`, `total_advance`, `vendor_penalty`, `total_mission_cost`, `remaining_amt`, `final_vendor_pay`, `final_vendor_pay_date`, `vendor_name`, `vendor_phone`, `m_sheet_trun_distributor`, `m_sheet_trun_distributor_date`, `itv_return_status`, `usc_pay_remark`, `final_mission_status`, `driver_name`, `driver_tazkira`, `driver_phone`, `truck_no`, `seal_no`, `fuel_type`, `fuel_qty_up`, `fuel_qty_dw_1`, `fuel_qty_dw_1_date`, `placard_1_rqst`, `destination_2`, `fuel_qty_dw_2`, `fuel_qty_dw_2_date`, `placard_2_rqst`, `destination_3`, `fuel_qty_dw_3`, `fuel_qty_dw_3_date`, `placard_3_rqst`, `destination_4`, `fuel_qty_dw_4`, `fuel_qty_dw_4_date`, `final_shrtg_calc`, `final_shrtg_as_customer`, `final_delivery_percentange_calc`, `final_delivery_percentange_as_client`, `pilferage`, `current_location`, `mission_issue_status`, `mission_issue_status_date`, `tmr_created_by`, `tmr_created`, `tmr_updated_by`, `tmr_updated`) VALUES
+(13, 'sadfsdfj', '2012-04-18 10:12:00', 'Ajiboner l', '', 'Yes', '', '', '', '3', '0', NULL, 1, '', '0000-00-00', '', 'sdfsdf', '', 1, '4', '', '', '', 'sdfbsdf', 'usg', 'yes', 0, '0000-00-00 00:00:00', '2012-04-18 05:42:00', '2012-04-18 05:42:00', '', '0000-00-00 00:00:00', '2012-04-18 05:42:00', NULL, '2012-04-18 05:42:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 0, '2012-04-18 05:42:09', NULL, '2012-05-19 11:16:46'),
+(14, 'asdfbsdf2394234', '2012-04-11 00:00:00', 'What is it', 'Still don know', 'not_pinging', 'don Know', '', '', '2', 'dasdasasd2312', NULL, 1, '', '0000-00-00', '', 'Kabul', 'Herat', 1, '1', 'sdfsdf', 'vc dfnb', '4', '', 'psc', '', 11, '2012-04-23 18:22:00', '2012-04-13 00:00:00', '2012-04-11 00:00:00', '', '0000-00-00 00:00:00', '2012-04-13 00:00:00', '0000-00-00 00:00:00', '2012-04-13 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', 'Rolled Over', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '1', '', '', '0000-00-00 00:00:00', 'not_returned', '', '', '', '', '', '2134y234', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 0, '2012-04-18 15:26:01', NULL, '2012-05-28 17:53:00'),
+(15, 'asdfbsdf2394234', '2012-04-11 00:00:00', 'What is it', 'Still don know', 'not_pinging', 'don Know N', '', '', '3', '12', NULL, 1, '', '0000-00-00', '', 'Kabul', 'Herat', 1, '2', 'sdfsdf', 'vc dfnb', '1', 's897asdfsdf923e4', 'psc', '', 12, '2012-04-23 18:22:00', '2012-04-13 00:00:00', '2012-04-11 00:00:00', '', '0000-00-00 00:00:00', '2012-04-13 00:00:00', '0000-00-00 00:00:00', '2012-04-26 07:09:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '2', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '2134y234', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 0, '2012-04-18 17:04:15', NULL, '2012-05-24 21:42:22'),
+(16, 'sadfsdfj', '2012-04-18 10:12:00', 'Rustam Jai', '', 'Yes', '', '', '', '1', '0', NULL, 1, '', '0000-00-00', '', 'sdfsdf', '', 1, '3', 'sdfsdf', 'sdfsdf', '9', 'sdfbsdf', 'usg', '', 0, '2012-04-23 18:22:00', '2012-04-18 05:42:00', '2012-04-18 05:42:00', '', '0000-00-00 00:00:00', '2012-04-18 05:42:00', '0000-00-00 00:00:00', '2012-04-18 05:42:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '4', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', 'sdfs34534', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 0, '2012-04-18 17:07:27', NULL, '2012-05-24 21:43:29'),
+(17, 'sdfsdfsdf', '2012-04-21 12:04:00', '', '', 'Yes', '', '', '', '1', '', NULL, 1, '', '0000-00-00', '', '', '', 1, '1', '', '', '', 'sdfsdfsdf', 'usg', '', 0, '2012-04-23 18:22:00', '2012-04-21 07:42:00', '2012-04-21 07:42:00', '', '0000-00-00 00:00:00', '2012-04-21 07:42:00', '0000-00-00 00:00:00', '2012-04-21 07:42:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 1, '2012-04-21 07:42:04', NULL, '2012-05-24 21:43:31'),
+(18, '2187934312423', '2012-04-21 12:12:00', 'met', '', 'pinging', '', 'away_coold', '', '1', '', '', 2, '234234nsdfbsdf', '0000-00-00', '', 'baf', 'baf', 1, '2', '1', '1', '1', 'sdfbsdfsdfsd', 'usg', 'no', 0, '2012-04-23 18:22:00', '2012-05-24 07:08:00', '2012-05-24 07:08:00', '', '0000-00-00 00:00:00', '2012-04-21 07:43:00', '0000-00-00 00:00:00', '2012-04-21 07:43:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 'not_approved', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '122', '0000-00-00 00:00:00', '123', '0000-00-00 00:00:00', '1212', '0000-00-00 00:00:00', '', '', '', '', '1212', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', 'no', '', '', '0000-00-00', 1, '2012-04-21 07:43:08', 1, '2012-05-24 21:43:32'),
+(19, '2187934312423', '2012-04-21 12:12:00', 'met', '', 'pinging', '', 'away_coold', '', '1', '', '', 1, '', '0000-00-00', '', 'baf', 'baf', 1, '4', '1', '1', '1', 'sdfbsdfsdfsd', 'usg', 'no', 0, '2012-04-23 18:22:00', '2012-04-21 07:43:00', '2012-04-21 07:43:00', '', '0000-00-00 00:00:00', '2012-04-21 07:43:00', '0000-00-00 00:00:00', '2012-04-21 07:43:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 'not_approved', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', 'no', '', '', '0000-00-00', 1, '2012-04-21 07:43:47', 1, '2012-05-24 21:43:33'),
+(20, '5678', '2012-04-21 12:16:00', '', '', 'Yes', '', '', '', '4', '', NULL, 5, '', '0000-00-00', '', '', '', 1, '1', '', '', '', 'sdhfbsdfgsdfgdf', 'usg', '', 0, '2012-04-23 18:22:00', '2012-04-21 07:46:00', '2012-04-21 07:46:00', '', '0000-00-00 00:00:00', '2012-04-21 07:46:00', '0000-00-00 00:00:00', '2012-04-21 07:46:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 1, '2012-04-21 07:46:48', NULL, '2012-05-24 21:43:35'),
+(21, 'fdgrt456', '2012-04-23 09:43:00', '', '', 'Yes', '', '', '', '1', '', NULL, 1, '', '0000-00-00', '', '', '', 1, '3', '', '', '', '', 'usg', '', 0, '0000-00-00 00:00:00', '2012-04-23 09:43:00', '2012-04-23 09:43:00', '', '0000-00-00 00:00:00', '2012-04-23 09:43:00', NULL, '2012-04-23 09:43:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 1, '2012-04-23 09:43:30', NULL, '2012-05-19 01:09:37'),
+(22, '345345df', '2012-04-23 09:50:00', '', '', 'Yes', '', '', '', '4', '', NULL, 1, '', '0000-00-00', '', '', '', 1, '2', '', '', '', '', 'usg', '', 0, '2012-04-23 18:22:00', '2012-04-23 09:50:00', '2012-04-23 09:50:00', '', '0000-00-00 00:00:00', '2012-04-23 09:50:00', '0000-00-00 00:00:00', '2012-04-23 09:50:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 1, '2012-04-23 09:50:44', NULL, '2012-05-24 21:43:36'),
+(23, '23423', '2012-04-23 11:01:00', '', '', 'Yes', '', '', '', '2', '', NULL, 1, '', '0000-00-00', '', '', '', 1, '5', '', '', '', '', 'usg', '', 0, '2012-04-23 18:22:00', '2012-04-23 11:01:00', '2012-04-23 11:01:00', '', '0000-00-00 00:00:00', '2012-04-23 11:01:00', '0000-00-00 00:00:00', '2012-04-23 11:01:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 1, '2012-04-23 11:01:50', NULL, '2012-05-24 21:43:37'),
+(24, 'AAcc123', '2012-04-23 18:22:00', 'asdfsdfsd', '', 'Yes', 'sdfsdf', '', '', '2', '', NULL, 1, '', '0000-00-00', '', 'dfgdfgdfg', 'dfgdfg', 1, '6', 'asdasd', 'asdasd', 'ASasda', 'asddfsdf234', 'usg', '', 0, '2012-04-23 18:22:00', '2012-04-23 18:22:00', '2012-04-23 18:22:00', '', '0000-00-00 00:00:00', '2012-04-23 18:22:00', '0000-00-00 00:00:00', '2012-04-23 18:22:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 1, '2012-04-23 18:22:48', NULL, '2012-05-24 21:43:39'),
+(25, '23232abcd', '2012-04-24 05:01:00', 'met', '', 'pinging', '', 'away_coold', '', '4', '', '', 1, '', '0000-00-00', '', 'baf', 'baf', 1, '5', '1', '', '1', 'sdfbsdf', 'usg', 'no', 0, '2012-04-23 18:22:00', '2012-04-24 05:01:00', '2012-04-24 05:01:00', '', '0000-00-00 00:00:00', '2012-04-24 05:01:00', '0000-00-00 00:00:00', '2012-04-24 05:01:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 'not_approved', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '123', '0000-00-00 00:00:00', '123', '0000-00-00 00:00:00', '123', '0000-00-00 00:00:00', '', '', '', '', '123', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', 'no', '', '', '0000-00-00', 1, '2012-04-24 05:01:56', 1, '2012-05-24 21:43:41'),
+(26, 'tyfr78', '2012-05-15 00:00:00', '', '', 'pinging', '', 'away_coold', '', '1', NULL, NULL, 1, '', '0000-00-00', '', 'baf', 'baf', 1, '1', '', '', '', '', 'usg', '', 0, '0000-00-00 00:00:00', '2012-05-21 12:11:00', '2012-05-21 12:11:00', '', '0000-00-00 00:00:00', '2012-05-21 12:11:00', NULL, '2012-05-21 12:11:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 3, '2012-05-21 12:11:22', NULL, '2012-05-21 18:11:22'),
+(27, 'tyfr78', '2012-05-15 00:00:00', '', '', 'pinging', '', 'away_coold', '', '1', NULL, NULL, 1, '', '0000-00-00', '', 'baf', 'baf', 1, '1', '', '', '', '', 'usg', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '0000-00-00', 3, '2012-05-21 12:16:37', NULL, '2012-05-21 18:16:37'),
+(28, 'AGDSADASD123', '2012-05-24 10:16:00', 'met', '', 'pinging', '', 'away_coold', '', '1', '', '', 1, '', '0000-00-00', '', 'baf', 'baf', 1, '1', '1', '', '1', '', 'usg', 'no', 15, '2012-04-23 18:22:00', '2012-05-24 05:47:00', '2012-05-24 05:47:00', '', '0000-00-00 00:00:00', '2012-05-24 05:47:00', '0000-00-00 00:00:00', '2012-05-24 05:47:00', '', '', '', '0000-00-00 00:00:00', 'not_approved', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', 'no', '', '', '0000-00-00', 1, '2012-05-24 05:47:16', NULL, '2012-05-24 21:43:42'),
+(29, 'AABBCD123', '2012-05-24 10:17:00', 'met', '', 'pinging', '', 'away_coold', '', '1', '', '', 1, '', '0000-00-00', '', 'baf', 'baf', 1, '1', '1', '', '1', '', 'usg', 'no', 123, '2012-04-23 18:22:00', '2012-05-24 05:48:00', '2012-05-24 05:48:00', '', '0000-00-00 00:00:00', '2012-05-24 05:48:00', '0000-00-00 00:00:00', '2012-05-24 05:48:00', '', '', '', '0000-00-00 00:00:00', 'not_approved', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', 'baf', '', '0000-00-00', '', '', '', '0000-00-00', '', '', '', '', 'no', '', '', '0000-00-00', 1, '2012-05-24 05:48:26', NULL, '2012-05-24 21:43:44'),
+(30, 'qweqweqw', '2012-06-21 00:00:00', ' ', '', ' ', '', ' ', '', '1', '', '', 1, '234dfg', '0000-00-00', 'sajdfsdfdsf', 'baf', 'baf', 1, '1', '1', '', '1', '', 'none', 'no', 12, '0000-00-00 00:00:00', '2012-06-03 11:16:00', '2012-06-03 11:16:00', '', '0000-00-00 00:00:00', '2012-06-03 11:16:00', '0000-00-00 00:00:00', '2012-06-03 11:16:00', '', '', '', '0000-00-00 00:00:00', 'not_approved', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '', '12', '0000-00-00', '', 'baf', '12', '0000-00-00', '', 'baf', '12', '0000-00-00', '', '', '23', '0000-00-00', '', '', '', '', 'no', '', 'open', '0000-00-00', 1, '2012-06-03 11:16:24', NULL, '2012-06-03 17:16:24'),
+(31, 'Ebrakadebra', '2012-06-05 00:00:00', ' ', '', ' ', '', ' ', '', '1', '', '', 1, '34234fgdfg', '2012-06-02', 'this is a container remark', 'baf', 'baf', 1, '1', '1', '', '1', '', 'none', 'no', 99, '0000-00-00 00:00:00', '2012-06-03 15:57:00', '2012-06-03 15:57:00', '', '0000-00-00 00:00:00', '2012-06-03 15:57:00', '0000-00-00 00:00:00', '2012-06-03 15:57:00', '', '', '', '0000-00-00 00:00:00', 'not_approved', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', 'JP8', '23', '23', '2012-06-01', '', 'baf', '', '2012-06-01', '', 'baf', '12', '2012-06-02', '', '', '', '2012-06-01', '', '', '', '', 'no', '', 'open', '2012-06-03', 1, '2012-06-03 15:57:40', NULL, '2012-06-03 21:57:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usc_tmr_attachments`
+--
+
+CREATE TABLE IF NOT EXISTS `usc_tmr_attachments` (
+  `attach_id` int(10) NOT NULL AUTO_INCREMENT,
+  `trnscn_id` int(10) NOT NULL,
+  `attach_orig_name` varchar(50) NOT NULL,
+  `attach_saved_name` varchar(50) NOT NULL,
+  `attach_type` varchar(30) NOT NULL COMMENT 'rsd,ontheway,rld,dem',
+  `created` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  PRIMARY KEY (`attach_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `usc_tmr_attachments`
+--
+
+INSERT INTO `usc_tmr_attachments` (`attach_id`, `trnscn_id`, `attach_orig_name`, `attach_saved_name`, `attach_type`, `created`, `created_by`) VALUES
+(25, 18, 'Koala.jpg', '81cabff39e4db97653462f1044113635.jpg', 'rsd', '2012-05-24 11:01:21', 1),
+(23, 18, 'Jellyfish.jpg', 'd2a4f1d5e8fb29a04cddf5d5239c4be9.jpg', 'rsd', '2012-05-24 11:01:01', 1),
+(24, 18, 'Chrysanthemum.jpg', 'f869754c72ee54be4d7729d144ce7f5f.jpg', 'ontheway', '2012-05-24 11:01:01', 1),
+(21, 29, 'Chrysanthemum.jpg', '6eb4c79d3ebd0058a2219c21759d0f97.jpg', 'rsd', '2012-05-24 05:48:26', 1),
+(22, 29, 'Koala.jpg', '39e133d5dcdbed43e2d95bc82fb50812.jpg', 'ontheway', '2012-05-24 05:48:26', 1),
+(20, 29, 'Hydrangeas.jpg', '944a9d7408b11d5004d21e8279efb2ec.jpg', 'rsd', '2012-05-24 05:48:26', 1),
+(18, 25, 'Hydrangeas.jpg', 'f9477fd6672355b219269abf5146583e.jpg', 'rsd', '2012-04-24 05:01:56', 1),
+(19, 25, 'Jellyfish.jpg', 'e409a9a637a1dce40dd273ebcc08196b.jpg', 'rsd', '2012-04-24 05:01:56', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usc_tmr_email`
+--
+
+CREATE TABLE IF NOT EXISTS `usc_tmr_email` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `trnscn_id` int(30) NOT NULL,
+  `email_msg` text NOT NULL,
+  `created_by` int(10) unsigned NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `usc_tmr_email`
+--
+
+INSERT INTO `usc_tmr_email` (`id`, `trnscn_id`, `email_msg`, `created_by`, `created`) VALUES
+(1, 14, 'Arif is', 1, '2012-04-21 11:48:17'),
+(2, 14, 'scared and disturbed', 1, '2012-04-21 11:48:22'),
+(3, 14, 'He doesn''t know what to do now !!', 1, '2012-04-21 12:28:41'),
+(4, 14, 'adasdasdasdasd', 1, '2012-04-21 12:34:50'),
+(5, 14, 'I am really confused', 1, '2012-04-21 12:48:36'),
+(6, 14, 'I am really confused', 1, '2012-04-21 12:49:04'),
+(7, 14, 'I am really confused', 1, '2012-04-21 12:49:28'),
+(8, 1, 'Email on create test', 1, '2012-04-21 13:43:47'),
+(9, 20, 'Another test tmr creation with email', 1, '2012-04-21 13:46:48'),
+(10, 20, 'I am saving 2nd email', 1, '2012-04-21 13:47:08'),
+(11, 24, 'I am new email', 1, '2012-04-24 00:22:48'),
+(12, 18, 'This is a new email for this TMR', 1, '2012-05-18 12:45:28'),
+(13, 19, '', 1, '2012-05-24 10:38:03'),
+(14, 25, '', 1, '2012-05-24 10:38:41'),
+(15, 25, 'Just a new email', 1, '2012-05-24 11:26:23'),
+(16, 29, 'dsdfbsdfbsdfbdfb', 1, '2012-05-24 11:48:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL DEFAULT '1',
+  `username` varchar(25) NOT NULL,
+  `password` varchar(34) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `banned` tinyint(1) NOT NULL DEFAULT '0',
+  `ban_reason` varchar(255) DEFAULT NULL,
+  `newpass` varchar(34) DEFAULT NULL,
+  `newpass_key` varchar(32) DEFAULT NULL,
+  `newpass_time` datetime DEFAULT NULL,
+  `last_ip` varchar(40) NOT NULL,
+  `last_login` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `role_id`, `username`, `password`, `email`, `banned`, `ban_reason`, `newpass`, `newpass_key`, `newpass_time`, `last_ip`, `last_login`, `created`, `modified`) VALUES
+(1, 2, 'admin', '$1$.d1.tp5.$0cXng94JYOfoainyRzy9k1', 'admin@localhost.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2012-06-08 05:49:32', '2008-11-30 04:56:32', '2012-06-08 11:49:32'),
+(2, 1, 'user', '$1$bO..IR4.$CxjJBjKJ5QW2/BaYKDS7f.', 'user@localhost.com', 1, NULL, NULL, NULL, NULL, '127.0.0.1', '2008-12-01 14:04:14', '2008-12-01 14:01:53', '2012-04-21 15:26:26'),
+(3, 3, 'arif', '$1$.d1.tp5.$0cXng94JYOfoainyRzy9k1', 'arifur.rahman@afghan-wireless.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2012-05-21 15:30:24', '2011-09-29 04:23:46', '2012-05-21 21:30:24'),
+(9, 4, 'stranger', '$1$xU/.mU/.$iltakHC/hw0nTldAJjISr1', 'arif@agilecrafts.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2012-04-15 03:34:08', '2011-10-11 11:17:59', '2012-04-15 09:34:08'),
+(23, 3, 'usccares', '$1$fS..6s..$28xxJL6eZmwAT48zlRBtO/', 'ron_sbn@yahoo.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2012-04-21 11:55:31', '2012-04-21 11:28:39', '2012-04-21 17:55:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_activity_log`
+--
+
+CREATE TABLE IF NOT EXISTS `user_activity_log` (
+  `activity_id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL DEFAULT '0',
+  `action_performed` varchar(200) NOT NULL,
+  `new_data` text,
+  `old_data` text,
+  `activity_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`activity_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin2 COMMENT='Stores all the user activity' AUTO_INCREMENT=127 ;
+
+--
+-- Dumping data for table `user_activity_log`
+--
+
+INSERT INTO `user_activity_log` (`activity_id`, `user_id`, `action_performed`, `new_data`, `old_data`, `activity_time`) VALUES
+(4, 1, 'edit_saf', '{"saf_id":38}', NULL, '2011-12-12 12:18:49'),
+(5, 1, 'delete_saf', '{"saf_id":42}', NULL, '2011-12-12 12:37:10'),
+(6, 1, 'create_saf', '{"saf_id":34}', NULL, '2011-12-18 15:28:49'),
+(7, 1, 'create_saf', '{"saf_id":34}', NULL, '2011-12-22 15:38:15'),
+(8, 1, 'create_saf', '{"saf_id":34}', NULL, '2011-12-25 17:23:50'),
+(9, 1, 'create_saf', '{"saf_id":34}', NULL, '2011-12-26 12:26:49'),
+(10, 1, 'create_saf', '{"saf_id":34}', NULL, '2011-12-26 13:26:00'),
+(11, 1, 'create_saf', '{"saf_id":34}', NULL, '2011-12-26 13:28:25'),
+(12, 1, 'create_saf', '{"saf_id":34}', NULL, '2011-12-26 15:38:13'),
+(13, 1, 'delete_saf', '{"saf_id":35}', NULL, '2011-12-26 15:42:15'),
+(14, 1, 'delete_saf', '{"saf_id":36}', NULL, '2011-12-26 15:42:18'),
+(15, 1, 'delete_saf', '{"saf_id":37}', NULL, '2011-12-26 15:42:21'),
+(16, 1, 'delete_saf', '{"saf_id":40}', NULL, '2011-12-26 15:42:24'),
+(17, 1, 'delete_saf', '{"saf_id":41}', NULL, '2011-12-26 15:42:27'),
+(18, 1, 'delete_saf', '{"saf_id":39}', NULL, '2011-12-26 15:42:30'),
+(19, 1, 'delete_saf', '{"saf_id":38}', NULL, '2011-12-26 15:42:35'),
+(20, 1, 'create_saf', '{"saf_id":48}', NULL, '2011-12-27 15:43:34'),
+(21, 1, 'create_saf', '{"saf_id":49}', NULL, '2011-12-27 16:10:15'),
+(22, 1, 'delete_saf', '{"saf_id":42}', NULL, '2011-12-27 16:41:31'),
+(23, 1, 'delete_saf', '{"saf_id":43}', NULL, '2011-12-27 16:41:34'),
+(24, 1, 'delete_saf', '{"saf_id":49}', NULL, '2011-12-27 16:41:37'),
+(25, 1, 'delete_saf', '{"saf_id":44}', NULL, '2011-12-27 16:41:40'),
+(26, 1, 'delete_saf', '{"saf_id":47}', NULL, '2011-12-27 16:41:44'),
+(30, 1, 'create_saf', '{"saf_id":52}', NULL, '2011-12-27 21:40:30'),
+(31, 1, 'create_saf', '{"saf_id":53}', NULL, '2011-12-27 21:41:19'),
+(32, 1, 'delete_saf', '{"saf_id":45}', NULL, '2011-12-27 21:43:00'),
+(33, 1, 'create_saf', '{"saf_id":54}', NULL, '2012-01-01 01:25:52'),
+(34, 1, 'delete_saf', '{"saf_id":54}', NULL, '2012-01-01 01:29:00'),
+(35, 1, 'create_saf', '{"saf_id":54}', NULL, '2012-01-01 11:05:37'),
+(36, 1, 'create_saf', '{"saf_id":55}', NULL, '2012-01-01 11:33:39'),
+(37, 1, 'create_saf', '{"saf_id":56}', NULL, '2012-01-01 13:20:03'),
+(38, 1, 'create_saf', '{"saf_id":57}', NULL, '2012-01-01 16:09:23'),
+(39, 1, 'create_saf', '{"saf_id":58}', NULL, '2012-01-01 16:51:25'),
+(40, 1, 'create_saf', '{"saf_id":59}', NULL, '2012-01-01 16:56:06'),
+(41, 1, 'create_saf', '{"saf_id":60}', NULL, '2012-01-01 17:02:20'),
+(42, 1, 'delete_saf', '{"saf_id":59}', NULL, '2012-01-01 17:02:51'),
+(43, 1, 'delete_saf', '{"saf_id":60}', NULL, '2012-01-01 17:02:53'),
+(44, 1, 'delete_saf', '{"saf_id":57}', NULL, '2012-01-01 17:02:56'),
+(45, 1, 'create_saf', '{"saf_id":59}', NULL, '2012-01-01 17:24:30'),
+(46, 1, 'create_saf', '{"saf_id":60}', NULL, '2012-01-01 17:25:45'),
+(47, 1, 'create_saf', '{"saf_id":61}', NULL, '2012-01-01 17:27:30'),
+(48, 1, 'create_saf', '{"saf_id":62}', NULL, '2012-01-01 17:29:07'),
+(49, 1, 'create_saf', '{"saf_id":63}', NULL, '2012-01-01 17:30:35'),
+(50, 1, 'create_saf', '{"saf_id":64}', NULL, '2012-01-01 17:32:03'),
+(51, 1, 'create_saf', '{"saf_id":65}', NULL, '2012-01-02 00:18:04'),
+(52, 1, 'create_saf', '{"saf_id":66}', NULL, '2012-01-02 11:13:10'),
+(53, 1, 'delete_saf', '{"saf_id":46}', NULL, '2012-01-02 11:13:54'),
+(54, 1, 'delete_saf', '{"saf_id":48}', NULL, '2012-01-02 11:13:56'),
+(55, 1, 'delete_saf', '{"saf_id":52}', NULL, '2012-01-02 11:13:58'),
+(56, 1, 'delete_saf', '{"saf_id":53}', NULL, '2012-01-02 11:14:00'),
+(57, 1, 'delete_saf', '{"saf_id":54}', NULL, '2012-01-02 11:14:01'),
+(58, 1, 'delete_saf', '{"saf_id":55}', NULL, '2012-01-02 11:14:03'),
+(59, 1, 'delete_saf', '{"saf_id":56}', NULL, '2012-01-02 11:14:07'),
+(60, 1, 'delete_saf', '{"saf_id":58}', NULL, '2012-01-02 11:14:09'),
+(61, 1, 'delete_saf', '{"saf_id":59}', NULL, '2012-01-02 11:14:11'),
+(62, 1, 'delete_saf', '{"saf_id":60}', NULL, '2012-01-02 11:14:12'),
+(63, 1, 'delete_saf', '{"saf_id":61}', NULL, '2012-01-02 11:14:14'),
+(64, 1, 'delete_saf', '{"saf_id":62}', NULL, '2012-01-02 11:14:18'),
+(65, 1, 'delete_saf', '{"saf_id":63}', NULL, '2012-01-02 11:14:19'),
+(66, 1, 'delete_saf', '{"saf_id":64}', NULL, '2012-01-02 11:14:21'),
+(67, 1, 'create_saf', '{"saf_id":67}', NULL, '2012-01-02 13:24:29'),
+(68, 1, 'delete_saf', '{"saf_id":65}', NULL, '2012-01-02 13:26:24'),
+(69, 1, 'delete_saf', '{"saf_id":67}', NULL, '2012-01-02 13:26:29'),
+(70, 1, 'create_saf', '{"saf_id":67}', NULL, '2012-01-02 15:47:04'),
+(71, 1, 'create_saf', '{"saf_id":68}', NULL, '2012-01-02 15:49:32'),
+(72, 1, 'create_saf', '{"saf_id":69}', NULL, '2012-01-03 10:01:58'),
+(73, 1, 'create_saf', '{"saf_id":70}', NULL, '2012-01-30 13:54:04'),
+(74, 1, 'create_saf', '{"saf_id":71}', NULL, '2012-01-30 15:46:25'),
+(75, 1, 'create_saf', '{"saf_id":72}', NULL, '2012-01-30 16:41:49'),
+(76, 1, 'create_saf', '{"saf_id":73}', NULL, '2012-01-31 13:15:26'),
+(77, 1, 'create_saf', '{"saf_id":74}', NULL, '2012-01-31 13:43:39'),
+(78, 1, 'create_saf', '{"saf_id":75}', NULL, '2012-01-31 13:51:05'),
+(79, 1, 'create_saf', '{"saf_id":76}', NULL, '2012-01-31 16:07:51'),
+(80, 1, 'delete_saf', '{"saf_id":70}', NULL, '2012-01-31 16:09:49'),
+(81, 1, 'delete_saf', '{"saf_id":75}', NULL, '2012-01-31 16:09:57'),
+(82, 1, 'delete_saf', '{"saf_id":74}', NULL, '2012-01-31 16:10:03'),
+(83, 1, 'delete_saf', '{"saf_id":76}', NULL, '2012-01-31 16:10:21'),
+(84, 1, 'delete_saf', '{"saf_id":73}', NULL, '2012-01-31 16:13:08'),
+(85, 1, 'create_saf', '{"saf_id":73}', NULL, '2012-02-01 15:36:29'),
+(86, 1, 'create_saf', '{"saf_id":74}', NULL, '2012-02-01 15:44:08'),
+(87, 1, 'delete_saf', '{"saf_id":74}', NULL, '2012-02-05 12:52:31'),
+(88, 1, 'create_saf', '{"saf_id":75}', NULL, '2012-02-05 17:05:15'),
+(89, 1, 'create_recycledsaf', '{"saf_id":1}', NULL, '2012-02-05 17:17:55'),
+(90, 1, 'create_recycledsaf', '{"saf_id":2}', NULL, '2012-02-06 10:54:37'),
+(91, 1, 'delete_recycledsaf', '{"saf_id":1}', NULL, '2012-02-06 11:06:12'),
+(92, 1, 'delete_recycledsaf', '{"saf_id":2}', NULL, '2012-02-06 11:06:36'),
+(93, 1, 'create_recycledsaf', '{"saf_id":3}', NULL, '2012-02-06 11:07:37'),
+(94, 1, 'create_recycledsaf', '{"saf_id":4}', NULL, '2012-02-12 16:48:05'),
+(95, 1, 'create_recycledsaf', '{"saf_id":5}', NULL, '2012-02-12 17:00:27'),
+(96, 1, 'create_recycledsaf', '{"saf_id":6}', NULL, '2012-02-12 17:06:34'),
+(97, 1, 'create_recycledsaf', '{"saf_id":7}', NULL, '2012-02-13 16:04:35'),
+(98, 9, 'create_saf', '{"saf_id":76}', NULL, '2012-02-20 12:59:52'),
+(99, 1, 'delete_saf', '{"saf_id":66}', NULL, '2012-02-25 09:09:25'),
+(100, 1, 'delete_saf', '{"saf_id":66}', NULL, '2012-02-25 09:09:33'),
+(101, 1, 'delete_saf', '{"saf_id":67}', NULL, '2012-02-25 09:14:16'),
+(102, 1, 'delete_saf', '{"saf_id":68}', NULL, '2012-02-25 09:15:25'),
+(103, 1, 'delete_saf', '{"saf_id":69}', NULL, '2012-02-25 09:15:31'),
+(104, 1, 'delete_recycledsaf', '{"saf_id":3}', NULL, '2012-02-25 09:16:58'),
+(105, 1, 'delete_recycledsaf', '{"saf_id":4}', NULL, '2012-02-25 19:53:24'),
+(106, 1, 'create_recycledsaf', '{"saf_id":9860}', NULL, '2012-03-12 16:52:20'),
+(107, 1, 'create_recycledsaf', '{"saf_id":9861}', NULL, '2012-03-12 16:54:16'),
+(108, 1, 'create_recycledsaf', '{"saf_id":9863}', NULL, '2012-03-12 17:00:06'),
+(109, 1, 'create_recycledsaf', '{"saf_id":9864}', NULL, '2012-03-12 17:00:57'),
+(110, 1, 'create_recycledsaf', '{"saf_id":9865}', NULL, '2012-03-12 17:01:32'),
+(111, 1, 'create_recycledsaf', '{"saf_id":9866}', NULL, '2012-03-12 17:01:55'),
+(112, 1, 'create_recycledsaf', '{"saf_id":9867}', NULL, '2012-03-12 17:02:14'),
+(113, 1, 'create_recycledsaf', '{"saf_id":9868}', NULL, '2012-03-12 17:03:00'),
+(114, 1, 'create_recycledsaf', '{"saf_id":9869}', NULL, '2012-03-12 17:03:37'),
+(115, 1, 'create_recycledsaf', '{"saf_id":9870}', NULL, '2012-03-12 17:03:53'),
+(116, 1, 'create_recycledsaf', '{"saf_id":9871}', NULL, '2012-03-12 17:04:10'),
+(117, 1, 'create_recycledsaf', '{"saf_id":9872}', NULL, '2012-03-12 17:04:21'),
+(118, 1, 'create_recycledsaf', '{"saf_id":9873}', NULL, '2012-03-12 17:04:47'),
+(119, 1, 'create_recycledsaf', '{"saf_id":9874}', NULL, '2012-03-12 17:05:08'),
+(120, 1, 'create_recycledsaf', '{"saf_id":9875}', NULL, '2012-03-12 17:10:56'),
+(121, 1, 'create_recycledsaf', '{"saf_id":9876}', NULL, '2012-03-12 17:11:23'),
+(122, 1, 'create_recycledsaf', '{"saf_id":9877}', NULL, '2012-03-12 17:11:25'),
+(123, 1, 'create_recycledsaf', '{"saf_id":9878}', NULL, '2012-03-12 17:11:27'),
+(124, 1, 'create_recycledsaf', '{"saf_id":9879}', NULL, '2012-03-12 17:11:28'),
+(125, 1, 'create_recycledsaf', '{"saf_id":9880}', NULL, '2012-03-12 17:11:29'),
+(126, 1, 'create_recycledsaf', '{"saf_id":9881}', NULL, '2012-03-12 17:11:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_autologin`
+--
+
+CREATE TABLE IF NOT EXISTS `user_autologin` (
+  `key_id` char(32) COLLATE utf8_bin NOT NULL,
+  `user_id` mediumint(8) NOT NULL DEFAULT '0',
+  `user_agent` varchar(150) COLLATE utf8_bin NOT NULL,
+  `last_ip` varchar(40) COLLATE utf8_bin NOT NULL,
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`key_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `user_autologin`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `user_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `employee_id` varchar(20) DEFAULT NULL,
+  `usr_photo` varchar(50) DEFAULT NULL,
+  `region` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+
+--
+-- Dumping data for table `user_profile`
+--
+
+INSERT INTO `user_profile` (`id`, `user_id`, `employee_id`, `usr_photo`, `region`) VALUES
+(1, 1, '007', '', 'Kabul'),
+(6, 9, '1234', '', 'kabul'),
+(7, 10, '1234', '', 'Badakhshan\r\n'),
+(8, 11, '1234', '', 'Badakhshan\r\n'),
+(9, 12, '234234', '', 'Jowzjan\r\n'),
+(10, 15, '123', '', 'Badakhshan\r\n'),
+(11, 16, '234234', '', 'Badakhshan\r\n'),
+(12, 17, '2345', '', 'Badakhshan\r\n'),
+(13, 18, '34343', '', 'Badakhshan\r\n'),
+(14, 19, '453456', '', 'Badakhshan\r\n'),
+(15, 20, '46565', '', 'Badakhshan\r\n'),
+(16, 21, '347564', '', 'Badakhshan\r\n'),
+(17, 22, '348957', '', 'Badakhshan\r\n'),
+(18, 23, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_temp`
+--
+
+CREATE TABLE IF NOT EXISTS `user_temp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_bin NOT NULL,
+  `password` varchar(34) COLLATE utf8_bin NOT NULL,
+  `email` varchar(100) COLLATE utf8_bin NOT NULL,
+  `activation_key` varchar(50) COLLATE utf8_bin NOT NULL,
+  `last_ip` varchar(40) COLLATE utf8_bin NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `user_temp`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_info`
+--
+
+CREATE TABLE IF NOT EXISTS `vendor_info` (
+  `vend_id` int(10) NOT NULL AUTO_INCREMENT,
+  `vendor_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`vend_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `vendor_info`
+--
+
+INSERT INTO `vendor_info` (`vend_id`, `vendor_name`) VALUES
+(1, 'Omer'),
+(2, 'Aftab'),
+(3, 'Rehan'),
+(4, 'Farid'),
+(5, 'Fahim'),
+(6, 'Nejat');
